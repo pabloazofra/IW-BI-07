@@ -18,13 +18,13 @@ class Crear(models.Model):
         ('sin gluten', 'Sin Gluten'),
     )
 
-    MASA = (
+    INGREDIENTES = (
         ('tomate', 'Salsa de tomate'),
     )
     masa = models.CharField(max_length=50, choices=MASA)
     ingredients = models.CharField(max_length=50, choices=INGREDIENTES)
  
-class Masas(models.Model):
+"""class Masas(models.Model):
     # Campo para la relación one-to-many (un empleado pertenece a un departamento)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     # Campo para la relación many-to-many (un empleado tiene varias habilidades)
@@ -33,4 +33,4 @@ class Masas(models.Model):
     fecha_nacimiento = models.DateField()
     # Es posible indicar un valor por defecto mediante 'default'
     antiguedad = models.IntegerField(default=0)
-    # Para permitir propiedades con valor null, añadiremos las opciones null=True, blank=True.       	
+    # Para permitir propiedades con valor null, añadiremos las opciones null=True, blank=True.       """
