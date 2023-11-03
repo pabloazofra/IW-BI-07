@@ -1,9 +1,13 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
         <title>{% block titulo %}Mamma Mia{% endblock %}</title>
     </head>
     <body>
@@ -11,5 +15,11 @@
 	     <h1>Gestor de Empleados</h1>
             {% block contenido %}{% endblock %}
         </div>
+        <footer>
+            <p id="parrafo-footer">
+                &copy; {{ year }} MammaMia <a href="null">Acerca de nosotros</a> <a href="">Contacto</a>
+                <a href="">Política de privacidad</a> <a href="">Términos y condiciones</a>
+            </p>
+        </footer>
     </body>
 </html>

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
 from django.http import HttpResponse
+from datetime import datetime
 
 def index(request):
-    return HttpResponse("Pizzas")
+    year = datetime.now().year
+    return render(request, "index.html", {'year': year})
