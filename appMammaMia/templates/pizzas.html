@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %} Lista de Pizzas {% endblock %}
+
+{% block contenido %}
+  <h2>Pizzas en el Menú</h2>
+  <ul>
+    {% for pizza in object_list %}
+      <li>{{ pizza.nombre }} - {{ pizza.descripcion }} - Precio: ${{ pizza.precio }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

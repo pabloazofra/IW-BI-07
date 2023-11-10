@@ -1,6 +1,20 @@
-
 {% extends "base.html" %}
 
-{% block contenido %}
+{% block titulo %} Menú {% endblock %}
 
+{% block contenido %}
+  <div style="display: flex; justify-content: space-around;">
+    <div style="width: 30%;">
+      <a href="{% url 'masas' %}"><h3>Masas</h3></a>
+      <p>Explora nuestras deliciosas masas.</p>
+    </div>
+    <div style="width: 30%;">
+      <a href="{% url 'ingredientes' %}"><h3>Ingredientes</h3></a>
+      <p>Descubre nuestros variados ingredientes.</p>
+    </div>
+    <div style="width: 30%;">
+      <a href="{% url 'pizzas' %}"><h3>Pizzas</h3></a>
+      <p>Conoce nuestras increíbles pizzas.</p>
+    </div>
+  </div>
 {% endblock %}

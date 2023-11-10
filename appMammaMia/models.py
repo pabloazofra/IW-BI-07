@@ -1,36 +1,34 @@
 from django.db import models
- 
-class Pizzas(models.Model):
-    # No es necesario crear un campo para la Primary Key, Django creará automáticamente un IntegerField.
+
+class Masa(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=5, decimal_places=2)
+    imagen = models.URLField()
 
-class Ingredientes(models.Model):
-    # No es necesario crear un campo para la Primary Key, Django creará automáticamente un IntegerField.
+    def __str__(self):
+        return self.nombre
+
+class Ingrediente(models.Model):
     nombre = models.CharField(max_length=50)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=5, decimal_places=2)
+    vegetariano = models.BooleanField(default=False)
+    alergenos = models.TextField()
+    imagen = models.URLField()
 
-class Crear(models.Model):
-    MASA = (
-        ('fina', 'Fina'),
-        ('clasica', 'Clásica'),
-        ('pan', 'Pan'),
-        ('queso', 'Queso'),
-        ('sin gluten', 'Sin Gluten'),
-    )
+    def __str__(self):
+        return self.nombre
 
-    INGREDIENTES = (
-        ('tomate', 'Salsa de tomate'),
-    )
-    masa = models.CharField(max_length=50, choices=MASA)
-    ingredients = models.CharField(max_length=50, choices=INGREDIENTES)
- 
-"""class Masas(models.Model):
-    # Campo para la relación one-to-many (un empleado pertenece a un departamento)
-    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    # Campo para la relación many-to-many (un empleado tiene varias habilidades)
-    habilidades = models.ManyToManyField(Habilidad)
-    nombre = models.CharField(max_length=40)
-    fecha_nacimiento = models.DateField()
-    # Es posible indicar un valor por defecto mediante 'default'
-    antiguedad = models.IntegerField(default=0)
-    # Para permitir propiedades con valor null, añadiremos las opciones null=True, blank=True.       """
+class Pizza(models.Model):
+    nombre = models.CharField(max_length=100)
+    masa = models.ForeignKey(Masa, on_delete=models.CASCADE)
+    ingredientes = models.ManyToManyField(Ingrediente)
+    descripcion = models.TextField()
+    imagen = models.URLField()
+    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    disponible = models.BooleanField(default=True)
+    calorias = models.IntegerField()
+
+    def __str__(self):
+        return self.nombre

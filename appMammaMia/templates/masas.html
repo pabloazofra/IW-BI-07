@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %} Lista de Masas {% endblock %}
+
+{% block contenido %}
+  <h2>Masas Disponibles</h2>
+  <ul>
+    {% for masa in object_list %}
+      <li>{{ masa.nombre }} - {{ masa.descripcion }} - Precio: ${{ masa.precio }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

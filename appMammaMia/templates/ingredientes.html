@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %} Lista de Ingredientes {% endblock %}
+
+{% block contenido %}
+  <h2>Ingredientes Disponibles</h2>
+  <ul>
+    {% for ingrediente in object_list %}
+      <li>{{ ingrediente.nombre }} - {{ ingrediente.descripcion }} - Precio: ${{ ingrediente.precio }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
