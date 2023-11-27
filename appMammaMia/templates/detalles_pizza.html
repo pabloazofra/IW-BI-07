@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block titulo %} Detalles de Pizza {% endblock %}
+
+{% block contenido %}
+  <h2>{{ pizza.nombre }}</h2>
+  <p>Descripción: {{ pizza.descripcion }}</p>
+  <p>Precio: ${{ pizza.precio }}</p>
+  #añadir mas cosas
+
+{% endblock %}

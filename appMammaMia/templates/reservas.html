@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %} Reservas {% endblock %}
+
+{% block contenido %}
+  <h2>Listado de Reservas</h2>
+  <ul>
+    {% for reserva in reservas %}
+      <li>{{ reserva.nombre }} - {{ reserva.fecha }} - {{ reserva.hora }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

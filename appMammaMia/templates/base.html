@@ -15,16 +15,16 @@
         <h1>Mamma Mia Pizzeria</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="{% url 'menu' %}">Menu</a></li>
-                <li><a href="">Reservas</a></li>
-                <li><a href="">Contacto</a></li>
+                <li><a href="{% url 'appMammaMia:index' %}">Inicio</a></li>
+                <li><a href="{% url 'appMammaMia:menu' %}">Menu</a></li>
+                <li><a href="{% url 'appMammaMia:reservas' %}">Reservas</a></li>
             </ul>
         </nav>
       </header>
         <footer>
             <p id="parrafo-footer">
-                &copy; {{ year }} MammaMia <a href="">Acerca de nosotros</a> <a href="">Contacto</a>
+                &copy; {{ year }} MammaMia <a href="">Acerca de nosotros</a> 
+                <a href="{% url 'appMammaMia:contacto' %}">Contacto</a>
                 <a href="">Política de privacidad</a> <a href="">Términos y condiciones</a>
             </p>
         </footer>

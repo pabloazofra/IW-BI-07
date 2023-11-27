@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block titulo %} Detalles de Masa {% endblock %}
+
+{% block contenido %}
+  <h2>{{ masa.nombre }}</h2>
+  <p>Descripción: {{ masa.descripcion }}</p>
+  <p>Precio: ${{ masa.precio }}</p>
+  #añadir mas cosas
+  
+{% endblock %}
