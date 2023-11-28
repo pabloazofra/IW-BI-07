@@ -32,3 +32,7 @@ class Pizza(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Reserva(models.Model):
+    nombre_persona = models.CharField(max_length=100)
+    telefono = models.IntegerField(max_length=9)
