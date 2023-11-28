@@ -54,7 +54,7 @@ def menu(request):
 #hacer reservas (?)
 def reservas(request):
     reserva = get_object_or_404(Reserva)
-	context = {'reseerva': reserva }
+    context = {'reseerva': reserva }
     return render(request, 'reservas.html')
 
 #contactar
