@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import TemplateView, ListView
-from .models import Masa, Ingrediente, Pizza
+from .models import Masa, Ingrediente, Pizza, Reserva
 from django.http import HttpResponse
 from datetime import datetime
 
@@ -53,7 +53,8 @@ def menu(request):
 
 #hacer reservas (?)
 def reservas(request):
-    reservas = Reserva.objects.all()
+    reserva = get_object_or_404(Reserva)
+	context = {'reseerva': reserva }
     return render(request, 'reservas.html')
 
 #contactar
