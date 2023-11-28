@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import masas, ingredientes, pizzas, menu
+
 
 urlpatterns = [
      path('', views.index, name='index'),
