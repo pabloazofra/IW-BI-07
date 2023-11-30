@@ -13,6 +13,7 @@ def index(request):
 #devuelve listado de pizzas
 def pizzas(request):
     pizzas = get_list_or_404(Pizza.objects.all())
+    
     context = {'lista_pizzas': pizzas }
     return render(request, 'pizzas.html', context)
 
@@ -59,3 +60,6 @@ def reservas(request):
 #contactar
 def contacto(request):
     return render(request, 'contacto.html')
+
+def pedido(request):
+     return render(request, 'pedido.html')
