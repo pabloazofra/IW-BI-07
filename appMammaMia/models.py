@@ -4,7 +4,7 @@ class Masa(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=5, decimal_places=2)
-    imagen = models.URLField()
+    imagen = models.ImageField()
 
     def __str__(self):
         return self.nombre
@@ -15,7 +15,7 @@ class Ingrediente(models.Model):
     precio = models.DecimalField(max_digits=5, decimal_places=2)
     vegetariano = models.BooleanField(default=False)
     alergenos = models.TextField()
-    imagen = models.URLField()
+    imagen = models.ImageField()
 
     def __str__(self):
         return self.nombre
@@ -25,7 +25,7 @@ class Pizza(models.Model):
     masa = models.ForeignKey(Masa, on_delete=models.CASCADE)
     ingredientes = models.ManyToManyField(Ingrediente)
     descripcion = models.TextField()
-    imagen = models.URLField()
+    imagen = models.ImageField()
     precio = models.DecimalField(max_digits=6, decimal_places=2)
     disponible = models.BooleanField(default=True)
     calorias = models.IntegerField()

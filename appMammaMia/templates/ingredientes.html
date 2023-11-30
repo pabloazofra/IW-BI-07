@@ -5,7 +5,7 @@
 {% block contenido %}
   <h2>Ingredientes Disponibles</h2>
   <ul>
-    {% for ingrediente in object_list %}
+    {% for ingrediente in lista_ingredientes %}
       <li>{{ ingrediente.nombre }} - {{ ingrediente.descripcion }} - Precio: ${{ ingrediente.precio }}</li>
     {% endfor %}
   </ul>

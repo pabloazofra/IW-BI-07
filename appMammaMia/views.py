@@ -8,8 +8,7 @@ from datetime import datetime
 ##AÑADIR MAS COSAS A LOS DETALLES DE CADA COSA
 
 def index(request):
-    year = datetime.now().year
-    return render(request, "index.html", {'year': year})
+    return render(request, "index.html")
 
 #devuelve listado de pizzas
 def pizzas(request):
@@ -54,8 +53,8 @@ def menu(request):
 #hacer reservas (?)
 def reservas(request):
     reserva = get_object_or_404(Reserva)
-    context = {'reseerva': reserva }
-    return render(request, 'reservas.html')
+    context = {'reserva': reserva }
+    return render(request, 'reservas.html', context)
 
 #contactar
 def contacto(request):
