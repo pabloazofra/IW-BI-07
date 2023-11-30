@@ -62,4 +62,7 @@ def contacto(request):
     return render(request, 'contacto.html')
 
 def pedido(request):
-     return render(request, 'pedido.html')
+    pizzas = get_list_or_404(Pizza.objects.all())
+    
+    context = {'lista_pizzas': pizzas }
+    return render(request, 'pedido.html', context)
