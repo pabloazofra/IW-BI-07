@@ -49,7 +49,7 @@ def detalles_ingrediente(request):
 
 #devuelve el menu
 def menu(request):
-    return render(request, 'menu.html') #podemos añadir mas productos que pizzas
+    return render(request, 'menu.html', {})
 
 #hacer reservas (?)
 def reservas(request):
