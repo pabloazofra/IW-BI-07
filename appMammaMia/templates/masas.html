@@ -5,7 +5,7 @@
 {% block contenido %}
   <h2>Masas Disponibles</h2>
   <ul>
-    {% for masa in object_list %}
+    {% for masa in lista_masas %}
       <li>{{ masa.nombre }} - {{ masa.descripcion }} - Precio: ${{ masa.precio }}</li>
     {% endfor %}
   </ul>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block titulo %} Pedido {% endblock %}
+
+{% block extrastyle %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilo_especifico.css' %}">
+{% endblock %}
+
+{% block contenido %}
+
+    <ul>
+        <li class="menu-item" onclick="toggleSubMenu('pizza')">Pizza
+            <ul id="pizza" class="submenu" style="display: none;">
+                    {% for pizza in lista_pizzas %}
+                    <li>
+                        {{ pizza.nombre }}
+                    </li>
+                    {% endfor %}
+            </ul>
+        </li>
+
+        <li class="menu-item" onclick="toggleSubMenu('pizzaGusto')">Pizza a tu gusto
+            <ul id="pizzaGusto" class="submenu" style="display: none;">
+                <li onclick="toggleSubMenu('masa')">Masa
+                    <ul id="masa" class="submenu" style="display: none;">
+                        <li>Delgada</li>
+                        <li>Normal</li>
+                        <li>Gruesa</li>
+                    </ul>
+                </li>
+                <li onclick="toggleSubMenu('ingredientes')">Ingredientes
+                    <ul id="ingredientes" class="submenu" style="display: none;">
+                        <li>Queso</li>
+                        <li>Tomate</li>
+                        <li>Jamón</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item" onclick="toggleSubMenu('snacks')">Snacks
+            <ul id="snacks" class="submenu" style="display: none;">
+                <li>Papas fritas</li>
+                <li>Nuggets</li>
+                <li>Palomitas</li>
+            </ul>
+        </li>
+
+        <li class="menu-item" onclick="toggleSubMenu('bebidas')">Bebidas
+            <ul id="bebidas" class="submenu" style="display: none;">
+                <li>Refrescos</li>
+                <li>Agua</li>
+                <li>Jugos</li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        // Función para mostrar/ocultar los submenús al hacer clic
+        function toggleSubMenu(submenuId) {
+            const currentSubmenu = document.getElementById(submenuId);
+            if (currentSubmenu) {
+                currentSubmenu.style.display = (currentSubmenu.style.display === 'block') ? 'none' : 'block';
+            }
+        }
+    </script>
+{% endblock %}

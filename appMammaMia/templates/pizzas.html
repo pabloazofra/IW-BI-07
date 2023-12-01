@@ -4,9 +4,15 @@
 
 {% block contenido %}
   <h2>Pizzas en el Menú</h2>
+  <br>
   <ul>
-    {% for pizza in object_list %}
-      <li>{{ pizza.nombre }} - {{ pizza.descripcion }} - Precio: ${{ pizza.precio }}</li>
+    {% for pizza in lista_pizzas %}
+      <li>{{ pizza.nombre }} - {{ pizza.descripcion }} - Precio: ${{ pizza.precio }}
+         - Ingredientes: 
+        {% for ingrediente in pizza.ingredientes.all %}
+        {{ ingrediente.nombre }}
+        {% endfor %}
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}

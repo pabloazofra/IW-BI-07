@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load static %}
         <link rel="stylesheet" href="{% static 'style.css' %}">
+        {% block extrastyle %} {% endblock %}
         <title>{% block titulo %}Mamma Mia{% endblock %}</title>
     </head>
     <body>
@@ -21,12 +22,19 @@
             </ul>
         </nav>
       </header>
+      {% block contenido %}
+      {% endblock %}
         <footer>
             <p id="parrafo-footer">
-                &copy; {{ year }} MammaMia <a href="">Acerca de nosotros</a> 
+                &copy; <span id="anyoMostrado"></span> MammaMia <a href="">Acerca de nosotros</a> 
                 <a href="">Contacto</a>
                 <a href="">Política de privacidad</a> <a href="">Términos y condiciones</a>
             </p>
         </footer>
+        <script>
+            var fechaActual = new Date();
+            var anyoActual = fechaActual.getFullYear();
+            document.getElementById("anyoMostrado").innerHTML = anyoActual;
+            </script>
     </body>
 </html>

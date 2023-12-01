@@ -1,0 +1,33 @@
+/* Estilos para el menú */
+ul {
+    list-style-type: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+li {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Estilos para los desplegables */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    cursor: pointer;
+}
+
+.submenu li {
+    display: block;
+}
+
+/* Estilo para resaltar el elemento seleccionado */
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
