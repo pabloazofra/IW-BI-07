@@ -47,10 +47,6 @@ def detalles_ingrediente(request):
 	context = {'ingrediente': ingrediente }
 	return render(request, 'detalles_ingre.html', context)
 
-#devuelve el menu
-def menu(request):
-    return render(request, 'menu.html', {})
-
 #hacer reservas (?)
 def reservas(request):
     reserva = get_object_or_404(Reserva)
