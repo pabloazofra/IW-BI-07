@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import TemplateView, ListView
-from .models import Masa, Ingrediente, Pizza, Reserva
+from .models import Masa, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante
 from django.http import HttpResponse
 from datetime import datetime
 
@@ -58,7 +58,18 @@ def contacto(request):
     return render(request, 'contacto.html')
 
 def pedido(request):
+    bebidas = get_list_or_404(Bebida)
+    entrantes = get_list_or_404(Entrante)
+    masas = get_list_or_404(Masa)
+    ingredientes = get_list_or_404(Ingrediente)
     pizzas = get_list_or_404(Pizza.objects.all())
-    
-    context = {'lista_pizzas': pizzas }
+    pedido = Pedido.objects.all()
+
+    context = {'lista_pizzas': pizzas,
+               'lista_pizzasTugusto': pedido,
+               'lista_entrantes': entrantes, 
+               'lista_bebidas': bebidas,
+               'lista_masas': masas,
+               'lista_ingredientes': ingredientes
+               }
     return render(request, 'pedido.html', context)
