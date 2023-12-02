@@ -86,30 +86,26 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-            function toggleSubMenu(submenuId) {
-                const currentSubmenu = $(`#${submenuId}-container`);
+        function toggleSubMenu(submenuId) {
+            const currentSubmenu = $(`#${submenuId}-container`);
 
-                if (currentSubmenu) {
-                    const isActive = currentSubmenu.hasClass('active');
+            if (currentSubmenu) {
+                const isActive = currentSubmenu.hasClass('active');
 
-                    // Oculta todos los submenús excepto el actual y los elementos de casillas de verificación
-                    $('.submenu-container').not(currentSubmenu).slideUp().removeClass('active');
+                // Hide all submenus except the current one and checkbox elements
+                $('.submenu-container').not(currentSubmenu).slideUp().removeClass('active');
 
-                    // Muestra u oculta el submenú actual
-                    if (!isActive) {
-                        currentSubmenu.slideDown().addClass('active');
-                    } else {
-                        currentSubmenu.slideUp().removeClass('active');
-                    }
+                // Show or hide the current submenu
+                if (!isActive) {
+                currentSubmenu.slideDown().addClass('active');
+                } else {
+                // Only close the submenu if the click was not on the container
+                if (!$(event.target).closest(currentSubmenu).length) {
+                    currentSubmenu.slideUp().removeClass('active');
+                }
                 }
             }
-
-            // Agrega un evento al hacer clic en cualquier parte del documento para ocultar los submenús
-            $(document).on('click', function(event) {
-                if (!$(event.target).closest('.menu-item, :checkbox').length) {
-                    $('.submenu-container').slideUp().removeClass('active');
-                }
-            });
+            }
     </script>
     
 {% endblock %}

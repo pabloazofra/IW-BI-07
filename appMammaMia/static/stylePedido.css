@@ -31,7 +31,8 @@
 }
 
 .menu-item.active + .menu-item {
-    margin-top: 15px; /* Ajuste: añade margen superior solo cuando el submenú está activo */
+    margin-top: 15px; 
+    position: relative;
 }
 
 .submenu-container {
@@ -40,8 +41,11 @@
     left: 0;
     width: 100%;
     display: none;
+    max-height: 0;
     transition: max-height 0.3s ease-out; /* Agregado: transición en la altura */
     z-index: 1;
+    
+
 }
 
 .submenu-container.active {
@@ -69,3 +73,7 @@
 .submenu.active {
     display: block;
 }
+
+.menu-item.active + .menu-item .submenu-container {
+    max-height: 200px;
+  }
