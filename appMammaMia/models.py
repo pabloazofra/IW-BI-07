@@ -15,7 +15,7 @@ class Ingrediente(models.Model):
     precio = models.DecimalField(max_digits=5, decimal_places=2)
     vegetariano = models.BooleanField(default=False)
     alergenos = models.TextField()
-    imagen = models.ImageField()
+    imagen = models.ImageField(upload_to='ingredientes/', blank=True, null=True)
 
     def __str__(self):
         return self.nombre
