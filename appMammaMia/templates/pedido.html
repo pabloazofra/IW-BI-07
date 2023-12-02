@@ -4,65 +4,112 @@
 
 {% block extrastyle %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/estilo_especifico.css' %}">
+    <link rel="stylesheet" href="{% static 'stylePedido.css' %}">
 {% endblock %}
 
 {% block contenido %}
-
-    <ul>
+    <ul id="lista" class="menu">
         <li class="menu-item" onclick="toggleSubMenu('pizza')">Pizza
-            <ul id="pizza" class="submenu" style="display: none;">
+            <div id="pizza-container" class="submenu-container">
+                <ul id="pizza" class="submenu">
                     {% for pizza in lista_pizzas %}
-                    <li>
-                        {{ pizza.nombre }}
-                    </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pizza_checkbox" value="{{ pizza.nombre }}">
+                                {{ pizza.nombre }}
+                            </label>
+                        </li>
                     {% endfor %}
-            </ul>
+                </ul>
+            </div>
         </li>
 
         <li class="menu-item" onclick="toggleSubMenu('pizzaGusto')">Pizza a tu gusto
-            <ul id="pizzaGusto" class="submenu" style="display: none;">
-                <li onclick="toggleSubMenu('masa')">Masa
-                    <ul id="masa" class="submenu" style="display: none;">
-                        <li>Delgada</li>
-                        <li>Normal</li>
-                        <li>Gruesa</li>
+            <div id="pizzaGusto-container" class="submenu-container">
+                <ul id="pizzaGusto" class="submenu">
+                    <br><h4>Masas</h4><br>
+                    <ul>
+                        {% for masa in lista_masas %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ masa.id }}">
+                                {{ masa.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
                     </ul>
-                </li>
-                <li onclick="toggleSubMenu('ingredientes')">Ingredientes
-                    <ul id="ingredientes" class="submenu" style="display: none;">
-                        <li>Queso</li>
-                        <li>Tomate</li>
-                        <li>Jamón</li>
+                    <br><h4>Ingredientes</h4><br>
+                    <ul>
+                        {% for ingrediente in lista_ingredientes %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ ingrediente.id }}">
+                                {{ ingrediente.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
                     </ul>
-                </li>
-            </ul>
+                </ul>
+            </div>
         </li>
 
-        <li class="menu-item" onclick="toggleSubMenu('snacks')">Snacks
-            <ul id="snacks" class="submenu" style="display: none;">
-                <li>Papas fritas</li>
-                <li>Nuggets</li>
-                <li>Palomitas</li>
-            </ul>
+        <li class="menu-item" onclick="toggleSubMenu('entrantes')">Entrantes
+            <div id="entrantes-container" class="submenu-container">
+                <ul id="entrantes" class="submenu">
+                    {% for entrante in lista_entrantes %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="entrantes_checkbox" value="{{ entrante.nombre }}">
+                                {{ entrante.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </li>
 
-        <li class="menu-item" onclick="toggleSubMenu('bebidas')">Bebidas
-            <ul id="bebidas" class="submenu" style="display: none;">
-                <li>Refrescos</li>
-                <li>Agua</li>
-                <li>Jugos</li>
-            </ul>
+        <li id="bebidas" class="menu-item" onclick="toggleSubMenu('bebidas')">Bebidas
+            <div id="bebidas-container" class="submenu-container">
+                <ul id="bebidas" class="submenu">
+                    {% for bebida in lista_bebidas %}
+                        <li>
+                            <label>
+                                <input type="checkbox" name="bebidas_checkbox" value="{{ bebida.nombre }}">
+                                {{ bebida.nombre }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </li>
     </ul>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        // Función para mostrar/ocultar los submenús al hacer clic
-        function toggleSubMenu(submenuId) {
-            const currentSubmenu = document.getElementById(submenuId);
-            if (currentSubmenu) {
-                currentSubmenu.style.display = (currentSubmenu.style.display === 'block') ? 'none' : 'block';
+            function toggleSubMenu(submenuId) {
+                const currentSubmenu = $(`#${submenuId}-container`);
+
+                if (currentSubmenu) {
+                    const isActive = currentSubmenu.hasClass('active');
+
+                    // Oculta todos los submenús excepto el actual y los elementos de casillas de verificación
+                    $('.submenu-container').not(currentSubmenu).slideUp().removeClass('active');
+
+                    // Muestra u oculta el submenú actual
+                    if (!isActive) {
+                        currentSubmenu.slideDown().addClass('active');
+                    } else {
+                        currentSubmenu.slideUp().removeClass('active');
+                    }
+                }
             }
-        }
+
+            // Agrega un evento al hacer clic en cualquier parte del documento para ocultar los submenús
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('.menu-item, :checkbox').length) {
+                    $('.submenu-container').slideUp().removeClass('active');
+                }
+            });
     </script>
+    
 {% endblock %}

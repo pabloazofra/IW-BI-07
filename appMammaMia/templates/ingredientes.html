@@ -3,10 +3,21 @@
 {% block titulo %} Lista de Ingredientes {% endblock %}
 
 {% block contenido %}
-  <h2>Ingredientes Disponibles</h2>
-  <ul>
+
+  <h2>Nuestros Ingredientes</h2>
+  <div class="ingredientes-lista">
     {% for ingrediente in lista_ingredientes %}
-      <li>{{ ingrediente.nombre }} - {{ ingrediente.descripcion }} - Precio: ${{ ingrediente.precio }}</li>
+      <div class="ingrediente-item">
+        <img src="{{ ingrediente.imagen.url }}" alt="{{ ingrediente.nombre }}">
+        <h3>{{ ingrediente.nombre }}</h3>
+        <p class="descripcion">{{ ingrediente.descripcion }}</p>
+        <p class="precio">Precio: ${{ ingrediente.precio }}</p>
+      </div>
+
+      <!-- Para que aparezcan en columnas de tres -->
+      {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div><div class="ingredientes-lista">
+      {% endif %}
     {% endfor %}
-  </ul>
+
 {% endblock %}
