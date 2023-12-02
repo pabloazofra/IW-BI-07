@@ -2,7 +2,58 @@
 
 {% block titulo %} Contacto {% endblock %}
 
+{% block extrastyle %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styleContacto.css' %}">
+{% endblock %}
+
 {% block contenido %}
-  <h2>Información de Contacto</h2>
-  <p>Puedes contactarnos a través de:</p>
+    <div class="contact-container">
+        <h2>Información de Contacto</h2>
+        <p>Puedes contactarnos a través de:</p>
+
+        <ul class="contact-list">
+            <li class="contact-item">
+                Dirección
+                <div class="submenu-container">
+                    <p>Nuestra dirección:</p>
+                    <ul>
+                        <li>Calle Ejemplo, Número 123</li>
+                        <li>Ciudad Ejemplo</li>
+                        <li>País Ejemplo</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="contact-item">
+                Teléfono
+                <div class="submenu-container">
+                    <p>Nuestro número de teléfono:</p>
+                    <ul>
+                        <li>+1234567890</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="contact-item">
+                Correo
+                <div class="submenu-container">
+                    <p>Nuestra dirección de correo electrónico:</p>
+                    <ul>
+                        <li>info@ejemplo.com</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.contact-item').click(function() {
+                $(this).find('.submenu-container').slideToggle();
+                $(this).siblings().find('.submenu-container').slideUp();
+            });
+        });
+    </script>
 {% endblock %}

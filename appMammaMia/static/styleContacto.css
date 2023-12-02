@@ -1,0 +1,43 @@
+/* styleContacto.css */
+
+/* Estilos para la página de contacto */
+.contact-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-item {
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.submenu-container {
+    display: none;
+    margin-left: 20px;
+}
+
+.submenu-container p {
+    margin-bottom: 10px;
+}
+
+.submenu-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.submenu-container li {
+    margin-bottom: 5px;
+    font-style: italic;
+}
