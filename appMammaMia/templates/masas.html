@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
-{% block titulo %} Lista de Masas {% endblock %}
+{% block titulo %} Tipos de Masas {% endblock %}
 
 {% block contenido %}
-  <h2>Masas Disponibles</h2>
-  <ul>
-    {% for masa in lista_masas %}
-      <li>{{ masa.nombre }} - {{ masa.descripcion }} - Precio: ${{ masa.precio }}</li>
-    {% endfor %}
-  </ul>
+    <h2>Tipos de Masas Disponibles</h2>
+    <ul>
+        {% for masa in tipos_de_masa %}
+            <li>
+                <a href="{% url 'detalles_masa' masa.id %}">{{ masa.nombre }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
+

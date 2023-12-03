@@ -1,11 +1,36 @@
 {% extends "base.html" %}
 
-{% block titulo %} Detalles de Masa {% endblock %}
+{% block titulo %} Detalles de Tipo de Masa - {{ masa.nombre }} {% endblock %}
 
 {% block contenido %}
-  <h2>{{ masa.nombre }}</h2>
-  <p>Descripción: {{ masa.descripcion }}</p>
-  <p>Precio: ${{ masa.precio }}</p>
-  #añadir mas cosas
-  
+    <div class="masa-details">
+        <h2>Detalles de Tipo de Masa</h2>
+        <div class="masa-info">
+            <h3>{{ masa.nombre }}</h3>
+            <p class="descripcion-masa">{{ masa.descripcion }}</p>
+            <p>Precio: ${{ masa.precio }}</p>
+            <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen">
+        </div>
+
+        <div class="pizzas-asociadas">
+            <h3>Pizzas Asociadas a {{ masa.nombre }}</h3>
+            {% if pizzas_asociadas %}
+                <ul class="lista-pizzas">
+                    {% for pizza in pizzas_asociadas %}
+                        <li>
+                            <h4>{{ pizza.nombre }}</h4>
+                            <p>Descripción: {{ pizza.descripcion }}</p>
+                            <p>Precio: ${{ pizza.precio }}</p>
+                            <p>Calorías: {{ pizza.calorias }}</p>
+                            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+                        </li>
+                    {% empty %}
+                        <li>No hay pizzas asociadas a este tipo de masa.</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay pizzas asociadas a este tipo de masa.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
