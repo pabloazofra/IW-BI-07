@@ -44,7 +44,7 @@ class Reserva(models.Model):
 
 class PizzaATuGusto(models.Model):
     masa = models.ForeignKey(Masas, on_delete=models.CASCADE)
-    ingrediente = models.ManyToManyField(Ingrediente)
+    ingrediente = models.ManyToManyField(Ingrediente, blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -81,7 +81,7 @@ class DatosCliente(models.Model):
 class Pedido(models.Model):
     cliente = models.ForeignKey(DatosCliente, on_delete=models.CASCADE)
     pizza = models.ManyToManyField(Pizza, blank=True)
-    pizzaATuGusto = models.ManyToManyField(PizzaATuGusto, blank=True)
+    pizzaATuGusto = models.ManyToManyField(PizzaATuGusto, blank=True, null=True)
     entrantes = models.ManyToManyField(Entrante, blank=True)
     bebidas = models.ManyToManyField(Bebida, blank=True)
     comentario = models.TextField()

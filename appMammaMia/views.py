@@ -95,9 +95,13 @@ def guardar_datos_cliente(request):
             telefono = data.get('telefono')
 
             pizza = data.get('pizza')
-            entrantes = data.get('')
+            masa = data.get('masa')
+            ingrediente = data.get('ingrediente')
+            entrantes = data.get('entrantes')
+            bebidas = data.get('bebidas')
             comentario = data.get('comentario')
             
+
             # Crea un nuevo objeto DatosCliente y guárdalo en la base de datos
             nuevo_cliente = DatosCliente.objects.create(
                 nombreCliente=nombre,
@@ -105,10 +109,23 @@ def guardar_datos_cliente(request):
                 direccion=direccion,
                 telefono=telefono,
             )
-            
-            nuevo_pedido = Pedido.objects.create(
-                 
+
+            nueva_pizza_a_tu_gusto = PizzaATuGusto.objects.create(
+                 masa=masa
             )
+            nueva_pizza_a_tu_gusto.add(*ingrediente)
+
+            nuevo_pedido = Pedido.objects.create(
+                cliente=nuevo_cliente,
+                comentario=comentario
+            )
+
+            # Agrega elementos a las relaciones ManyToMany
+            nuevo_pedido.pizza.add(*pizza)
+            nuevo_pedido.pizzaATuGusto.add(nueva_pizza_a_tu_gusto)
+            nuevo_pedido.entrantes.add(*entrantes)
+            nuevo_pedido.bebidas.add(*bebidas)
+            
             return JsonResponse({'mensaje': 'Pedido y datos de cliente guardados correctamente'})
         except Exception as e:
             return JsonResponse({'error': f'Error en la vista: {str(e)}'}, status=500)
