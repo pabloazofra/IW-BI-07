@@ -65,22 +65,24 @@ class Bebida(models.Model):
     def __str__(self):
         return self.nombre
 
-class Pedido(models.Model):
-    pizza = models.ManyToManyField(Pizza, blank=True)
-    pizzaATuGusto = models.ManyToManyField(PizzaATuGusto, blank=True)
-    entrantes = models.ManyToManyField(Entrante, blank=True)
-    bebidas = models.ManyToManyField(Bebida, blank=True)
-
-    def __str__(self):
-        return f"Pedido {self.id}"
     
 class DatosCliente(models.Model):
     nombreCliente = models.CharField(max_length=100)
     apellidos = models.CharField(max_length=50)
     direccion = models.TextField()
     telefono = models.IntegerField(max_length=9)
-    comentario = models.TextField()
-    pedido = models.ManyToManyField(Pedido)
+    
 
     def __str__(self):
         return self.nombreCliente
+
+class Pedido(models.Model):
+    cliente = models.ForeignKey(DatosCliente, on_delete=models.CASCADE)
+    pizza = models.ManyToManyField(Pizza, blank=True)
+    pizzaATuGusto = models.ManyToManyField(PizzaATuGusto, blank=True)
+    entrantes = models.ManyToManyField(Entrante, blank=True)
+    bebidas = models.ManyToManyField(Bebida, blank=True)
+    comentario = models.TextField()
+
+    def __str__(self):
+        return f"Pedido {self.id}"

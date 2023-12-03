@@ -78,6 +78,10 @@ def pedido(request):
     return render(request, 'pedido.html', context)
 
 
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from .models import Pedido, DatosCliente
+
 def guardar_datos_cliente(request):
     if request.method == 'POST':
         # Obtener datos del formulario
@@ -85,22 +89,18 @@ def guardar_datos_cliente(request):
         apellidos = request.POST.get('apellidos')
         direccion = request.POST.get('direccion')
         telefono = request.POST.get('telefono')
-        comentario = request.POST.get('comentario')
-        pedido = request.POST.get('pedido')
 
         # Crear un nuevo objeto DatosCliente y guardarlo en la base de datos
         nuevo_cliente = DatosCliente.objects.create(
-            nombre=nombre,
+            nombre_cliente=nombre,
             apellidos=apellidos,
             direccion=direccion,
             telefono=telefono,
-            comentario=comentario, 
-            pedido=pedido
         )
 
         # Obtener productos seleccionados del formulario y agregarlos al pedido
         productos_seleccionados = request.POST.getlist('productos_checkbox')
-        nuevo_pedido = Pedido.objects.create(cliente=nuevo_cliente)
+        DatosCliente.objects.create(cliente=nuevo_cliente)
 
         for producto in productos_seleccionados:
             # Lógica para agregar cada producto al pedido
