@@ -27,6 +27,8 @@ h2 {
 #guardar {
     background-color: rgb(134, 134, 193);
     border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 #bebidas {

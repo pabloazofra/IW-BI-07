@@ -123,8 +123,21 @@
                 }
             
         })
+
+        const nombre = document.getElementById("nombre");
+        const apellidos = document.getElementById("apellidos");
+        const direccion = document.getElementById("direccion");
+        const telefono = document.getElementById("telefono");
+
+        const regex = /^\d{9}$/;
+
         btnGuardarDatos.addEventListener("click", ()=> {
-            ventana.close();
+
+            if(nombre && apellidos && direccion && telefono && regex.test(telefono.value)) {
+                ventana.close();
+            } else {
+                alert('No has rellenado todos los campos');
+            }
         })
     </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
