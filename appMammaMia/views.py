@@ -60,7 +60,7 @@ def contacto(request):
 def pedido(request):
     bebidas = get_list_or_404(Bebida)
     entrantes = get_list_or_404(Entrante)
-    masas = get_list_or_404(Masa)
+    masas = get_list_or_404(TipoMasa)
     ingredientes = get_list_or_404(Ingrediente)
     pizzas = get_list_or_404(Pizza.objects.all())
     pedido = Pedido.objects.all()
