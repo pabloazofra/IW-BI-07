@@ -97,7 +97,7 @@
             <input type="text"id="direccion"><br>
             <label for="telefono">Teléfono</label><br>
             <input type="text" id="telefono"><br><br>
-            <textarea name="comentario" id="" cols="30" rows="10" placeholder="Añada algun comentario para el repartidor"></textarea><br>
+            <textarea name="comentario" id="comentario" cols="30" rows="10" placeholder="Añada algun comentario para el repartidor"></textarea><br>
             <button type="submit" id="guardar">Realizar Pedido</button><br>
         </div>
     </dialog>
@@ -132,8 +132,39 @@
         const regex = /^\d{9}$/;
 
         btnGuardarDatos.addEventListener("click", ()=> {
-
             if(nombre && apellidos && direccion && telefono && regex.test(telefono.value)) {
+                $(document).ready(function () {
+                        $("#enviarDatos").click(function () {
+                            var nombre = $("#nombre").val();
+                            var apellidos = $("#apellidos").val();
+                            var direccion = $("direccion").val();
+                            var telefono = $("telefono").val();
+                            var comentario = $("comentario").val();
+                            var pedido_id = null;
+
+                            // Envia los datos al servidor
+                            $.ajax({
+                                url: "{% url 'guardar_datos_cliente' %}",
+                                type: "POST",
+                                data: {
+                                    nombreCliente: nombre,
+                                    apellidos: apellidos,
+                                    direccion: direccion,
+                                    telefono: telefono,
+                                    comentario: comentario,
+                                    pedido: pedido_id,
+                                },
+                                success: function (response) {
+                                    // Maneja la respuesta del servidor
+                                    console.log(response);
+                                },
+                                error: function (error) {
+                                    // Maneja errores
+                                    console.log(error);
+                                }
+                            });
+                        });
+                    });
                 ventana.close();
             } else {
                 alert('No has rellenado todos los campos');
