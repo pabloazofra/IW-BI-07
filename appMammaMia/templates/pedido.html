@@ -4,87 +4,90 @@
 
 {% block extrastyle %}
     {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'stylePedido.css' %}">
 {% endblock %}
 
 {% block contenido %}
 
-    <h2 id="titulo">¿Qué te apetece hoy?</h2>
-    <ul id="lista" class="menu">
-        <li class="menu-item" onclick="toggleSubMenu('pizza')">Pizza
-            <div id="pizza-container" class="submenu-container">
-                <ul id="pizza" class="submenu">
-                    {% for pizza in lista_pizzas %}
-                        <li>
-                            <label>
-                                <input type="checkbox" name="pizza_checkbox" value="{{ pizza.nombre }}" checked>
-                                {{ pizza.nombre }}
-                            </label>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </li>
+    <div class="container">
 
-        <li class="menu-item" onclick="toggleSubMenu('pizzaGusto')">Pizza a tu gusto
-            <div id="pizzaGusto-container" class="submenu-container">
-                <ul id="pizzaGusto" class="submenu">
-                    <br><h4>Masas</h4><br>
-                    <ul>
-                        {% for masa in lista_masas %}
-                        <li>
-                            <label>
-                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ masa.nombre }}">
-                                {{ masa.nombre }}
-                            </label>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                    <br><h4>Ingredientes</h4><br>
-                    <ul>
-                        {% for ingrediente in lista_ingredientes %}
-                        <li>
-                            <label>
-                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ ingrediente.nombre }}">
-                                {{ ingrediente.nombre }}
-                            </label>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </ul>
-            </div>
-        </li>
-
-        <li class="menu-item" onclick="toggleSubMenu('entrantes')">Entrantes
-            <div id="entrantes-container" class="submenu-container">
-                <ul id="entrantes" class="submenu">
+        <h2 class="heading">¿Qué te apetece hoy?</h2>
+    
+        <div class="accordion-container">
+    
+            <div class="accordion active">
+                <div class="accordion-heading">
+                    <h3>Entrantes</h3>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <label class="accordion-content">
                     {% for entrante in lista_entrantes %}
-                        <li>
-                            <label>
-                                <input type="checkbox" name="entrantes_checkbox" value="{{ entrante.nombre }}">
-                                {{ entrante.nombre }}
-                            </label>
-                        </li>
+                            <input type="checkbox" name="entrantes_checkbox" value="{{ entrante.nombre }}">
+                            {{ entrante.nombre }}
                     {% endfor %}
-                </ul>
+                </label>
             </div>
-        </li>
-
-        <li id="bebidas" class="menu-item" onclick="toggleSubMenu('bebidas')">Bebidas
-            <div id="bebidas-container" class="submenu-container">
-                <ul id="bebidas" class="submenu">
+    
+            <div class="accordion">
+                <div class="accordion-heading">
+                    <h3>Pizzas</h3>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <label class="accordion-content">
+                    {% for pizza in lista_pizzas %}
+                            <input type="checkbox" name="pizza_checkbox" value="{{ pizza.nombre }}">
+                            {{ pizza.nombre }}
+                    {% endfor %}
+                </label>
+            </div>
+    
+            <div class="accordion">
+                <div class="accordion-heading">
+                    <h3>Pizza a tu gusto</h3>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <label class="accordion-content">
+                    <p style="font-weight: bold;">Masas</p>
+                    {% for masa in lista_masas %}
+                            <input type="checkbox" name="masa_checkbox" value="{{ masa.nombre }}">
+                            {{ masa.nombre }}
+                    {% endfor %}
+                    <p style="font-weight: bold;">Ingredientes</p>
+                    {% for ingrediente in lista_ingredientes %}
+                            <input type="checkbox" name="ingrediente_checkbox" value="{{ ingrediente.nombre }}">
+                            {{ ingrediente.nombre }}
+                    {% endfor %}
+                </label>
+            </div>
+    
+            <div class="accordion">
+                <div class="accordion-heading">
+                    <h3>Bebidas</h3>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <label class="accordion-content">
                     {% for bebida in lista_bebidas %}
-                        <li>
-                            <label>
-                                <input type="checkbox" name="bebidas_checkbox" value="{{ bebida.nombre }}">
-                                {{ bebida.nombre }}
-                            </label>
-                        </li>
+                            <input type="checkbox" name="bebida_checkbox" value="{{ bebida.nombre }}">
+                            {{ bebida.nombre }}
                     {% endfor %}
-                </ul>
-            </div>
-        </li>
-    </ul>
+                </label>
+            </div>    
+        </div>
+    
+    </div>
+    
+    
+    <script>
+        let accordions = document.querySelectorAll('.accordion-container .accordion');
+        
+        accordions.forEach(acco =>{
+            acco.onclick = () =>{
+                accordions.forEach(subAcco => { subAcco.classList.remove('active') });
+                acco.classList.add('active');
+            } 
+        })
+    </script>
     <br> 
     <dialog id="ventana">
         <div id="container-ventana">
@@ -104,6 +107,7 @@
     <div class="container-boton">
         <button type="submit" id="enviar" class="boton-pedir" >Pedir</button>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         const btnAbrirVentana = document.getElementById("enviar");
         const ventana = document.getElementById("ventana");
@@ -144,7 +148,7 @@
 
                             // Envia los datos al servidor
                             $.ajax({
-                                url: "{% url 'guardar_datos_cliente' %}",
+                                url: "{% url 'guardar_cliente' %}",
                                 type: "POST",
                                 data: {
                                     nombreCliente: nombre,
@@ -170,29 +174,6 @@
                 alert('No has rellenado todos los campos');
             }
         })
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function toggleSubMenu(submenuId) {
-            const currentSubmenu = $(`#${submenuId}-container`);
-
-            if (currentSubmenu) {
-                const isActive = currentSubmenu.hasClass('active');
-
-                // Hide all submenus except the current one and checkbox elements
-                $('.submenu-container').not(currentSubmenu).slideUp().removeClass('active');
-
-                // Show or hide the current submenu
-                if (!isActive) {
-                currentSubmenu.slideDown().addClass('active');
-                } else {
-                // Only close the submenu if the click was not on the container
-                    if (!$(event.target).closest(currentSubmenu).length && !$(event.target).is('input[type="checkbox"]')) {
-                        currentSubmenu.slideUp().removeClass('active');
-                    }
-                }
-            }
-        }
     </script>
     
 {% endblock %}
