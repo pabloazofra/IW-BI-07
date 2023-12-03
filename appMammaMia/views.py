@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import TemplateView, ListView
-from .models import Masa, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante, DatosCliente
+from .models import Masas, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante, DatosCliente
 from django.http import JsonResponse
 from django.http import HttpResponse
 from datetime import datetime
@@ -26,15 +26,14 @@ def detalles_pizza(request):
 
 #devuelve listado de masas
 def masas(request):
-    masas = get_list_or_404(Masa.objects.all()) ##para la base de datos
-    context = {'lista_masas': masas }
-    return render(request, 'masas.html', context)
+    tipos_de_masa = Masas.objects.all()
+    return render(request, 'masas.html', {'tipos_de_masa': tipos_de_masa})
 
 #devuelve detalles de cada masa
-def detalles_masa(request):
-	masa = get_object_or_404(Masa)
-	context = {'masa': masa }
-	return render(request, 'detalles_masa.html', context)
+def detalles_masa(request, masa_id):
+    masa = get_object_or_404(Masas, pk=masa_id)
+    pizzas_asociadas = Pizza.objects.filter(tipo_masa=masa)
+    return render(request, 'detalles_masa.html', {'masa': masa, 'pizzas_asociadas': pizzas_asociadas})
 
 #devuelve listado de ingredientes
 def ingredientes(request):
@@ -61,7 +60,7 @@ def contacto(request):
 def pedido(request):
     bebidas = get_list_or_404(Bebida)
     entrantes = get_list_or_404(Entrante)
-    masas = get_list_or_404(Masa)
+    masas = get_list_or_404(Masas)
     ingredientes = get_list_or_404(Ingrediente)
     pizzas = get_list_or_404(Pizza.objects.all())
     pedido = Pedido.objects.all()

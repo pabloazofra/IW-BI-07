@@ -1,6 +1,7 @@
 from django.db import models
 
-class Masa(models.Model):
+
+class Masas(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=5, decimal_places=2)
@@ -8,6 +9,7 @@ class Masa(models.Model):
 
     def __str__(self):
         return self.nombre
+
 
 class Ingrediente(models.Model):
     nombre = models.CharField(max_length=50)
@@ -22,7 +24,7 @@ class Ingrediente(models.Model):
 
 class Pizza(models.Model):
     nombre = models.CharField(max_length=100)
-    masa = models.ForeignKey(Masa, on_delete=models.CASCADE)
+    masa = models.ForeignKey(Masas, on_delete=models.CASCADE)
     ingredientes = models.ManyToManyField(Ingrediente)
     descripcion = models.TextField()
     imagen = models.ImageField()
@@ -41,7 +43,7 @@ class Reserva(models.Model):
         return self.nombre
 
 class PizzaATuGusto(models.Model):
-    masa = models.ForeignKey(Masa, on_delete=models.CASCADE)
+    masa = models.ForeignKey(Masas, on_delete=models.CASCADE)
     ingrediente = models.ManyToManyField(Ingrediente)
 
     def __str__(self):
