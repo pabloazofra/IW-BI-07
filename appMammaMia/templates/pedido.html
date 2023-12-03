@@ -8,6 +8,8 @@
 {% endblock %}
 
 {% block contenido %}
+
+    <h2 id="titulo">¿Qué te apetece hoy?</h2>
     <ul id="lista" class="menu">
         <li class="menu-item" onclick="toggleSubMenu('pizza')">Pizza
             <div id="pizza-container" class="submenu-container">
@@ -15,7 +17,7 @@
                     {% for pizza in lista_pizzas %}
                         <li>
                             <label>
-                                <input type="checkbox" name="pizza_checkbox" value="{{ pizza.nombre }}">
+                                <input type="checkbox" name="pizza_checkbox" value="{{ pizza.nombre }}" checked>
                                 {{ pizza.nombre }}
                             </label>
                         </li>
@@ -32,7 +34,7 @@
                         {% for masa in lista_masas %}
                         <li>
                             <label>
-                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ masa.id }}">
+                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ masa.nombre }}">
                                 {{ masa.nombre }}
                             </label>
                         </li>
@@ -43,7 +45,7 @@
                         {% for ingrediente in lista_ingredientes %}
                         <li>
                             <label>
-                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ ingrediente.id }}">
+                                <input type="checkbox" name="pizzaGusto_checkbox" value="{{ ingrediente.nombre }}">
                                 {{ ingrediente.nombre }}
                             </label>
                         </li>
@@ -83,7 +85,92 @@
             </div>
         </li>
     </ul>
+    <br> 
+    <dialog id="ventana">
+        <div id="container-ventana">
+            <h2>Añada sus datos de contacto</h2><br>
+            <label for="nombre">Nombre</label><br>
+            <input type="text" id="nombre"><br>
+            <label for="apellidos">Apellidos</label><br>
+            <input type="text" id="apellidos"><br>
+            <label for="direccion">Dirección</label><br>
+            <input type="text"id="direccion"><br>
+            <label for="telefono">Teléfono</label><br>
+            <input type="text" id="telefono"><br><br>
+            <textarea name="comentario" id="comentario" cols="30" rows="10" placeholder="Añada algun comentario para el repartidor"></textarea><br>
+            <button type="submit" id="guardar">Realizar Pedido</button><br>
+        </div>
+    </dialog>
+    <div class="container-boton">
+        <button type="submit" id="enviar" class="boton-pedir" >Pedir</button>
+    </div>
+    <script>
+        const btnAbrirVentana = document.getElementById("enviar");
+        const ventana = document.getElementById("ventana");
+        const btnGuardarDatos = document.getElementById("guardar");
+        const checkboxs = document.querySelectorAll("input[type='checkbox']");
+        btnAbrirVentana.addEventListener("click", ()=> {
+            let alMenosUnoSeleccionado = false;
+            checkboxs.forEach(checkbox => {
+                if (checkbox.checked) {
+                    alMenosUnoSeleccionado = true;
+                }
+                });
+                if (alMenosUnoSeleccionado) {
+                    ventana.showModal();
+                } else {
+                    alert("Tienes que seleccionar almenos un producto");
+                }
+            
+        })
 
+        const nombre = document.getElementById("nombre");
+        const apellidos = document.getElementById("apellidos");
+        const direccion = document.getElementById("direccion");
+        const telefono = document.getElementById("telefono");
+
+        const regex = /^\d{9}$/;
+
+        btnGuardarDatos.addEventListener("click", ()=> {
+            if(nombre && apellidos && direccion && telefono && regex.test(telefono.value)) {
+                $(document).ready(function () {
+                        $("#enviarDatos").click(function () {
+                            var nombre = $("#nombre").val();
+                            var apellidos = $("#apellidos").val();
+                            var direccion = $("direccion").val();
+                            var telefono = $("telefono").val();
+                            var comentario = $("comentario").val();
+                            var pedido_id = null;
+
+                            // Envia los datos al servidor
+                            $.ajax({
+                                url: "{% url 'guardar_datos_cliente' %}",
+                                type: "POST",
+                                data: {
+                                    nombreCliente: nombre,
+                                    apellidos: apellidos,
+                                    direccion: direccion,
+                                    telefono: telefono,
+                                    comentario: comentario,
+                                    pedido: pedido_id,
+                                },
+                                success: function (response) {
+                                    // Maneja la respuesta del servidor
+                                    console.log(response);
+                                },
+                                error: function (error) {
+                                    // Maneja errores
+                                    console.log(error);
+                                }
+                            });
+                        });
+                    });
+                ventana.close();
+            } else {
+                alert('No has rellenado todos los campos');
+            }
+        })
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function toggleSubMenu(submenuId) {
@@ -100,12 +187,12 @@
                 currentSubmenu.slideDown().addClass('active');
                 } else {
                 // Only close the submenu if the click was not on the container
-                if (!$(event.target).closest(currentSubmenu).length) {
-                    currentSubmenu.slideUp().removeClass('active');
-                }
+                    if (!$(event.target).closest(currentSubmenu).length && !$(event.target).is('input[type="checkbox"]')) {
+                        currentSubmenu.slideUp().removeClass('active');
+                    }
                 }
             }
-            }
+        }
     </script>
     
 {% endblock %}

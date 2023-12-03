@@ -73,3 +73,14 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f"Pedido {self.id}"
+    
+class DatosCliente(models.Model):
+    nombreCliente = models.CharField(max_length=100)
+    apellidos = models.CharField(max_length=50)
+    direccion = models.TextField()
+    telefono = models.IntegerField(max_length=9)
+    comentario = models.TextField()
+    pedido = models.ManyToManyField(Pedido)
+
+    def __str__(self):
+        return self.nombreCliente

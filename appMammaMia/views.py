@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import TemplateView, ListView
-from .models import Masa, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante
+from .models import Masa, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante, DatosCliente
+from django.http import JsonResponse
 from django.http import HttpResponse
 from datetime import datetime
 
@@ -64,12 +65,52 @@ def pedido(request):
     ingredientes = get_list_or_404(Ingrediente)
     pizzas = get_list_or_404(Pizza.objects.all())
     pedido = Pedido.objects.all()
+    datosCliente = DatosCliente.objects.all()
 
     context = {'lista_pizzas': pizzas,
                'lista_pizzasTugusto': pedido,
                'lista_entrantes': entrantes, 
                'lista_bebidas': bebidas,
                'lista_masas': masas,
-               'lista_ingredientes': ingredientes
+               'lista_ingredientes': ingredientes,
+               'lista_clientes': datosCliente, 
                }
     return render(request, 'pedido.html', context)
+
+
+def guardar_datos_cliente(request):
+    if request.method == 'POST':
+        # Obtener datos del formulario
+        nombre = request.POST.get('nombre')
+        apellidos = request.POST.get('apellidos')
+        direccion = request.POST.get('direccion')
+        telefono = request.POST.get('telefono')
+        comentario = request.POST.get('comentario')
+        pedido = request.POST.get('pedido')
+
+        # Crear un nuevo objeto DatosCliente y guardarlo en la base de datos
+        nuevo_cliente = DatosCliente.objects.create(
+            nombre=nombre,
+            apellidos=apellidos,
+            direccion=direccion,
+            telefono=telefono,
+            comentario=comentario, 
+            pedido=pedido
+        )
+
+        # Obtener productos seleccionados del formulario y agregarlos al pedido
+        productos_seleccionados = request.POST.getlist('productos_checkbox')
+        nuevo_pedido = Pedido.objects.create(cliente=nuevo_cliente)
+
+        for producto in productos_seleccionados:
+            # Lógica para agregar cada producto al pedido
+            # Puedes obtener el producto por su nombre o algún identificador
+            # Ejemplo: producto_obj = Producto.objects.get(nombre=producto)
+            # Ejemplo de cómo agregar un producto al pedido:
+            # nuevo_pedido.productos.add(producto_obj)
+            pass
+
+        return JsonResponse({'mensaje': 'Pedido y datos de cliente guardados correctamente'})
+    else:
+        # Si la solicitud no es POST, redireccionar a la página del pedido
+        return redirect('pedido')
