@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block contenido %}
-
+    {% csrf_token %}
     <div class="container">
 
         <h2 class="heading">¿Qué te apetece hoy?</h2>
@@ -23,7 +23,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for entrante in lista_entrantes %}
-                            <input type="checkbox" name="entrantes_checkbox" value="{{ entrante.nombre }}">
+                            <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox" value="{{ entrante.id }}">
                             {{ entrante.nombre }}
                     {% endfor %}
                 </label>
@@ -36,7 +36,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for pizza in lista_pizzas %}
-                            <input type="checkbox" name="pizza_checkbox" value="{{ pizza.nombre }}">
+                            <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox" value="{{ pizza.id }}">
                             {{ pizza.nombre }}
                     {% endfor %}
                 </label>
@@ -48,14 +48,14 @@
                     <i class="fas fa-angle-down"></i>
                 </div>
                 <label class="accordion-content">
-                    <p style="font-weight: bold;">Masas</p>
+                    <h4 style="font-weight: bold;">Masas</h4>
                     {% for masa in lista_masas %}
-                            <input type="checkbox" name="masa_checkbox" value="{{ masa.nombre }}">
+                            <input type="checkbox" name="masa_checkbox" id="masa_checkbox" value="{{ masa.id }}">
                             {{ masa.nombre }}
                     {% endfor %}
-                    <p style="font-weight: bold;">Ingredientes</p>
+                    <h4 style="font-weight: bold;">Ingredientes</h4>
                     {% for ingrediente in lista_ingredientes %}
-                            <input type="checkbox" name="ingrediente_checkbox" value="{{ ingrediente.nombre }}">
+                            <input type="checkbox" name="ingrediente_checkbox" id="ingrediente_checkbox" value="{{ ingrediente.id }}">
                             {{ ingrediente.nombre }}
                     {% endfor %}
                 </label>
@@ -68,7 +68,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for bebida in lista_bebidas %}
-                            <input type="checkbox" name="bebida_checkbox" value="{{ bebida.nombre }}">
+                            <input type="checkbox" name="bebida_checkbox" id="bebida_checkbox" value="{{ bebida.id }}">
                             {{ bebida.nombre }}
                     {% endfor %}
                 </label>
@@ -97,7 +97,7 @@
             <label for="apellidos">Apellidos</label><br>
             <input type="text" id="apellidos"><br>
             <label for="direccion">Dirección</label><br>
-            <input type="text"id="direccion"><br>
+            <input type="text" id="direccion"><br>
             <label for="telefono">Teléfono</label><br>
             <input type="text" id="telefono"><br><br>
             <textarea name="comentario" id="comentario" cols="30" rows="10" placeholder="Añada algun comentario para el repartidor"></textarea><br>
@@ -135,45 +135,59 @@
 
         const regex = /^\d{9}$/;
 
-        btnGuardarDatos.addEventListener("click", ()=> {
-            if(nombre && apellidos && direccion && telefono && regex.test(telefono.value)) {
-                $(document).ready(function () {
-                        $("#enviarDatos").click(function () {
-                            var nombre = $("#nombre").val();
-                            var apellidos = $("#apellidos").val();
-                            var direccion = $("direccion").val();
-                            var telefono = $("telefono").val();
-                            var comentario = $("comentario").val();
-                            var pedido_id = null;
+        btnGuardarDatos.addEventListener("click", () => {
+            if (nombre && apellidos && direccion && telefono && regex.test(telefono.value)) {
 
-                            // Envia los datos al servidor
-                            $.ajax({
-                                url: "{% url 'guardar_cliente' %}",
-                                type: "POST",
-                                data: {
-                                    nombreCliente: nombre,
-                                    apellidos: apellidos,
-                                    direccion: direccion,
-                                    telefono: telefono,
-                                    comentario: comentario,
-                                    pedido: pedido_id,
-                                },
-                                success: function (response) {
-                                    // Maneja la respuesta del servidor
-                                    console.log(response);
-                                },
-                                error: function (error) {
-                                    // Maneja errores
-                                    console.log(error);
-                                }
-                            });
-                        });
-                    });
+                var checkboxEntrantes = Array.from(document.querySelectorAll('input[type="checkbox"][id="entrantes_checkbox"]:checked')).map(checkbox => checkbox.value);
+                var checkboxPizzas = Array.from(document.querySelectorAll('input[type="checkbox"][id="pizza_checkbox"]:checked')).map(checkbox => checkbox.value);
+                var checkboxMasas = Array.from(document.querySelectorAll('input[type="checkbox"][id="masa_checkbox"]:checked')).map(checkbox => checkbox.value);
+                var checkboxIngredientes = Array.from(document.querySelectorAll('input[type="checkbox"][id="ingrediente_checkbox"]:checked')).map(checkbox => checkbox.value);
+                var checkboxBebidas = Array.from(document.querySelectorAll('input[type="checkbox"][id="bebida_checkbox"]:checked')).map(checkbox => checkbox.value);
+                var comentarioValor = $("#comentario").val();
+
+                var nombreValor = $("#nombre").val();
+                var apellidosValor = $("#apellidos").val();
+                var direccionValor = $("#direccion").val();
+                var telefonoValor = $("#telefono").val();
+
+                var csrftoken = $('[name=csrfmiddlewaretoken]').val();
+                
+                // Envia los datos al servidor
+                $.ajax({
+                    url: "{% url 'guardar_datos_cliente' %}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    
+                    data: {
+                        nombreCliente: nombreValor,
+                        apellidos: apellidosValor,
+                        direccion: direccionValor,
+                        telefono: telefonoValor,
+                        pizza: checkboxPizzas,
+                        masa: checkboxMasas,
+                        ingrediente: checkboxIngredientes,
+                        entrante: checkboxEntrantes,
+                        bebida: checkboxBebidas,
+                        comentario: comentarioValor,
+                    },
+                    success: function (response) {
+                        // Maneja la respuesta del servidor
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        // Maneja errores
+                        console.log(error);
+                    }
+                });
+
                 ventana.close();
             } else {
                 alert('No has rellenado todos los campos');
             }
-        })
+        });
+
     </script>
     
 {% endblock %}
