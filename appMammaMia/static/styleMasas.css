@@ -1,0 +1,57 @@
+/* styleMasas.css */
+
+/* Estilos para la página de masas */
+.masas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.masas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.masa-item {
+    width: 300px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.masa-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.masa-info {
+    padding: 15px;
+}
+
+.masa-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ccc;
+}
+
+.masa-nombre {
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.masa-descripcion {
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.masa-precio {
+    margin-top: 10px;
+    font-weight: bold;
+}
