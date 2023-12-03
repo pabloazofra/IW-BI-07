@@ -5,7 +5,7 @@
 {% block contenido %}
     <h2>Tipos de Masas Disponibles</h2>
     <ul>
-        {% for masa in tipos_de_masa %}
+        {% for masa in masas %}
             <li>
                 <a href="{% url 'detalles_masa' masa.id %}">{{ masa.nombre }}</a>
             </li>
