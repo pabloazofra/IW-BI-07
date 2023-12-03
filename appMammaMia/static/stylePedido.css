@@ -7,6 +7,10 @@ h2 {
     justify-content: center;
 }
 
+dialog {
+    border: 2px solid black;
+}
+
 #ventana {
     position: absolute;
     top: 50%;
@@ -15,7 +19,6 @@ h2 {
     z-index: 1000;
     width: 70%;
     height: 55%;
-    
 }
 
 #container-ventana {
@@ -82,7 +85,7 @@ body{
 .container .accordion-container .accordion.active .accordion-heading i{
   color:#fff;
   transform: rotate(180deg);
-  transition: transform .2s .1s;
+  transition: transform .2s 0.1s;
 }
 
 .container .accordion-container .accordion.active .accordion-content{
@@ -114,7 +117,7 @@ body{
   background: #fff;
   border-top: 0;
   display: none;
-  animation: animate .2s linear backwards;
+  animation: animate 0.25s linear backwards;
   line-height: 2;
   transform-origin: top;
 }
