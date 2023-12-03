@@ -31,7 +31,7 @@ def detalles_pizza(request):
 #devuelve listado de masas
 def masas(request):
     tipos_de_masa = Masas.objects.all()
-    return render(request, 'masas.html', {'tipos_de_masa': tipos_de_masa})
+    return render(request, 'masas.html', {'masas': tipos_de_masa})
 
 #devuelve detalles de cada masa
 def detalles_masa(request, masa_id):
