@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views.generic import TemplateView, ListView
-from .models import Masas, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante, DatosCliente
+from .models import Masas, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante, DatosCliente, PizzaATuGusto
 from django.http import JsonResponse
-from django.http import HttpResponse
-from datetime import datetime
+from django.http import HttpResponseBadRequest, HttpResponse
+
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 
 ##AÑADIR MAS COSAS A LOS DETALLES DE CADA COSA
 
@@ -77,54 +81,37 @@ def pedido(request):
     return render(request, 'pedido.html', context)
 
 
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from .models import Pedido, DatosCliente
 
 def guardar_datos_cliente(request):
-    try:
-        if request.method == 'POST':
-        # Obtener datos del formulario
-            nombre = request.POST.get('nombre')
-            apellidos = request.POST.get('apellidos')
-            direccion = request.POST.get('direccion')
-            telefono = request.POST.get('telefono')
+    if request.method == 'POST':
+        try:
+            # Lee y decodifica los datos JSON del cuerpo de la solicitud
+            data = json.loads(request.body)
             
-            pizza = request.POST.getlist('pizza')
-            masa = request.POST.get('masa')
-            ingrediente = request.POST.getlist('ingrediente')
-            pizzaATuGusto = pizzaATuGusto.objects.create(masa=masa, ingrediente=ingrediente)
-            entrantes = request.POST.getlist('entrantes')
-            bebidas = request.POST.getlist('bebidas')
-            comentario = request.POST.get('bebidas')
+            # Extrae datos del diccionario
+            nombre = data.get('nombreCliente')
+            apellidos = data.get('apellidos')
+            direccion = data.get('direccion')
+            telefono = data.get('telefono')
 
-            # Crear un nuevo objeto DatosCliente y guardarlo en la base de datos
+            pizza = data.get('pizza')
+            entrantes = data.get('')
+            comentario = data.get('comentario')
+            
+            # Crea un nuevo objeto DatosCliente y guárdalo en la base de datos
             nuevo_cliente = DatosCliente.objects.create(
-                nombre_cliente=nombre,
+                nombreCliente=nombre,
                 apellidos=apellidos,
                 direccion=direccion,
                 telefono=telefono,
             )
-            DatosCliente.objects.create(cliente=nuevo_cliente)
-
-            nuevo_pedido = Pedido.objects.create(
-                cliente=nuevo_cliente,
-                pizza=pizza,
-                pizzaATuGusto=pizzaATuGusto,
-                entrantes=entrantes,
-                bebidas=bebidas,
-                comentario=comentario
-            )
-            #
             
-
-
-
+            nuevo_pedido = Pedido.objects.create(
+                 
+            )
             return JsonResponse({'mensaje': 'Pedido y datos de cliente guardados correctamente'})
-        else:
-            # Si la solicitud no es POST, redireccionar a la página del pedido
-            return redirect('pedido')
-
-    except Exception as e:
-        import traceback
-        print(traceback.format_exc())
+        except Exception as e:
+            return JsonResponse({'error': f'Error en la vista: {str(e)}'}, status=500)
+    else:
+        # Si la solicitud no es POST, redireccionar a la página del pedido
+        return redirect('pedido')

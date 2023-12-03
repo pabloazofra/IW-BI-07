@@ -23,7 +23,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for entrante in lista_entrantes %}
-                            <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox" value="{{ entrante.id }}">
+                            <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox_{{ entrante.id }}" value="{{ entrante.id }}">
                             {{ entrante.nombre }}
                     {% endfor %}
                 </label>
@@ -36,7 +36,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for pizza in lista_pizzas %}
-                            <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox" value="{{ pizza.id }}">
+                            <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox_{{ pizza.id }}" value="{{ pizza.id }}">
                             {{ pizza.nombre }}
                     {% endfor %}
                 </label>
@@ -50,12 +50,12 @@
                 <label class="accordion-content">
                     <h4 style="font-weight: bold;">Masas</h4>
                     {% for masa in lista_masas %}
-                            <input type="checkbox" name="masa_checkbox" id="masa_checkbox" value="{{ masa.id }}">
+                            <input type="checkbox" name="masa_checkbox" id="masa_checkbox_{{ masa.id }}" value="{{ masa.id }}">
                             {{ masa.nombre }}
                     {% endfor %}
                     <h4 style="font-weight: bold;">Ingredientes</h4>
                     {% for ingrediente in lista_ingredientes %}
-                            <input type="checkbox" name="ingrediente_checkbox" id="ingrediente_checkbox" value="{{ ingrediente.id }}">
+                            <input type="checkbox" name="ingrediente_checkbox" id="ingrediente_checkbox_{{ ingrediente.id }}" value="{{ ingrediente.id }}">
                             {{ ingrediente.nombre }}
                     {% endfor %}
                 </label>
@@ -68,7 +68,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for bebida in lista_bebidas %}
-                            <input type="checkbox" name="bebida_checkbox" id="bebida_checkbox" value="{{ bebida.id }}">
+                            <input type="checkbox" name="bebida_checkbox" id="bebida_checkbox_{{ bebida.id }}" value="{{ bebida.id }}">
                             {{ bebida.nombre }}
                     {% endfor %}
                 </label>
@@ -100,14 +100,14 @@
             <input type="text" id="direccion"><br>
             <label for="telefono">Teléfono</label><br>
             <input type="text" id="telefono"><br><br>
-            <textarea name="comentario" id="comentario" cols="30" rows="10" placeholder="Añada algun comentario para el repartidor"></textarea><br>
+            <textarea name="comentario" id="comentario" cols="30" rows="5" placeholder="Añada algun comentario para el repartidor"></textarea><br>
             <button type="submit" id="guardar">Realizar Pedido</button><br>
         </div>
     </dialog>
     <div class="container-boton">
         <button type="submit" id="enviar" class="boton-pedir" >Pedir</button>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         const btnAbrirVentana = document.getElementById("enviar");
         const ventana = document.getElementById("ventana");
@@ -132,7 +132,7 @@
         const apellidos = document.getElementById("apellidos");
         const direccion = document.getElementById("direccion");
         const telefono = document.getElementById("telefono");
-
+        
         const regex = /^\d{9}$/;
 
         btnGuardarDatos.addEventListener("click", () => {
@@ -145,10 +145,10 @@
                 var checkboxBebidas = Array.from(document.querySelectorAll('input[type="checkbox"][id="bebida_checkbox"]:checked')).map(checkbox => checkbox.value);
                 var comentarioValor = $("#comentario").val();
 
-                var nombreValor = $("#nombre").val();
-                var apellidosValor = $("#apellidos").val();
-                var direccionValor = $("#direccion").val();
-                var telefonoValor = $("#telefono").val();
+                var nombreValor = nombre.value;
+                var apellidosValor = apellidos.value;
+                var direccionValor = direccion.value;
+                var telefonoValor = telefono.value;
 
                 var csrftoken = $('[name=csrfmiddlewaretoken]').val();
                 
@@ -159,8 +159,7 @@
                     headers: {
                         'X-CSRFToken': csrftoken
                     },
-                    
-                    data: {
+                    data: JSON.stringify({
                         nombreCliente: nombreValor,
                         apellidos: apellidosValor,
                         direccion: direccionValor,
@@ -168,10 +167,12 @@
                         pizza: checkboxPizzas,
                         masa: checkboxMasas,
                         ingrediente: checkboxIngredientes,
-                        entrante: checkboxEntrantes,
-                        bebida: checkboxBebidas,
+                        entrantes: checkboxEntrantes,
+                        bebidas: checkboxBebidas,
                         comentario: comentarioValor,
-                    },
+                    }),
+                    contentType: 'application/json',
+
                     success: function (response) {
                         // Maneja la respuesta del servidor
                         console.log(response);

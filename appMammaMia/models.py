@@ -76,7 +76,7 @@ class DatosCliente(models.Model):
     
 
     def __str__(self):
-        return self.nombreCliente
+        return "{}".format(self.nombreCliente)
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(DatosCliente, on_delete=models.CASCADE)
