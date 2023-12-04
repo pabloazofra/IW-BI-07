@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 {% block titulo %} Menú de Pizzas {% endblock %}
 
 {% block contenido %}
+
   <div class="menu-container">
     <h2 class="text-center mb-4">Explora Nuestro Menú de Pizzas</h2>
 
@@ -30,4 +33,7 @@
       </div>
     </div>
   </div>
+
+  <!-- Enlace al archivo de estilos -->
+  <link rel="stylesheet" href="{% static 'stylePizzas.css' %}">
 {% endblock %}
