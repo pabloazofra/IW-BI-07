@@ -82,3 +82,42 @@ nav ul li a:hover{
     width: 100%;
     border-radius: 5px;
 }
+
+
+/* eSTILOS PARA LA PAGINA DE INICIO */
+.menu-items {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.menu-item {
+    width: 30%;
+    text-align: center;
+}
+
+.menu-item img {
+    max-width: 100%; 
+}
+
+.entrantes {
+    margin-top: 20px;
+}
+
+.entrantes h2 {
+    text-align: center;
+}
+
+.entrantes-items {
+    display: flex;
+    justify-content: space-around;
+}
+
+.entrantes-item {
+    width: 30%;
+    text-align: center;
+}
+
+.entrantes-item img {
+    max-width: 100%;
+}
