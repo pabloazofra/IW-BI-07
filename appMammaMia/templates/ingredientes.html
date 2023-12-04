@@ -3,12 +3,12 @@
 {% block titulo %} Lista de Ingredientes {% endblock %}
 
 {% block contenido %}
-
+{% load static %}
   <h2>Nuestros Ingredientes</h2>
   <div class="ingredientes-lista">
     {% for ingrediente in lista_ingredientes %}
       <div class="ingrediente-item">
-        <img src="{{ ingrediente.imagen.url }}" alt="{{ ingrediente.nombre }}">
+        <img src="{% static ingrediente.imagen.name %}" alt="{{ ingrediente.nombre }}">
         <h3>{{ ingrediente.nombre }}</h3>
         <p class="descripcion">{{ ingrediente.descripcion }}</p>
         <p class="precio">Precio: ${{ ingrediente.precio }}</p>
