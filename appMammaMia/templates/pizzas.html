@@ -3,25 +3,25 @@
 {% block titulo %} Menú de Pizzas {% endblock %}
 
 {% block contenido %}
-  <div class="container mt-4">
+  <div class="menu-container">
     <h2 class="text-center mb-4">Explora Nuestro Menú de Pizzas</h2>
 
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-md-10 offset-md-1">
         <div class="card-deck">
           {% for pizza in lista_pizzas %}
-            <div class="card mb-4">
-              <img src="{{ pizza.imagen.url }}" class="card-img-top" alt="{{ pizza.nombre }}">
+            <div class="card mb-4 pizza-card">
+              <img src="{{ pizza.imagen.url }}" class="card-img-top pizza-imagen" alt="{{ pizza.nombre }}">
               <div class="card-body">
-                <h5 class="card-title">{{ pizza.nombre }}</h5>
-                <p class="card-text">{{ pizza.descripcion }}</p>
+                <h5 class="card-title pizza-nombre">{{ pizza.nombre }}</h5>
+                <p class="card-text pizza-descripcion">{{ pizza.descripcion }}</p>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Ingredientes:
+                  <li class="list-group-item pizza-ingredientes">Ingredientes:
                     {% for ingrediente in pizza.ingredientes.all %}
                       {{ ingrediente.nombre }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                   </li>
-                  <li class="list-group-item">Precio: ${{ pizza.precio }}</li>
+                  <li class="list-group-item pizza-precio">Precio: ${{ pizza.precio }}</li>
                 </ul>
               </div>
             </div>
