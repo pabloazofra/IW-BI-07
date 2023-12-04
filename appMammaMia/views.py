@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView
 from .models import Masas, Ingrediente, Pizza, Reserva, Pedido, Bebida, Entrante, DatosCliente, PizzaATuGusto
 from django.http import JsonResponse
 from django.http import HttpResponseBadRequest, HttpResponse
-
+from django.db import transaction
 import json
 from django.views.decorators.csrf import csrf_exempt
 
@@ -82,6 +82,9 @@ def pedido(request):
 
 
 
+
+
+@transaction.atomic  # Utiliza una transacción para garantizar la integridad de la base de datos
 def guardar_datos_cliente(request):
     if request.method == 'POST':
         try:
@@ -101,30 +104,31 @@ def guardar_datos_cliente(request):
             bebidas = data.get('bebidas')
             comentario = data.get('comentario')
             
+            # Inicia una transacción para garantizar la integridad de la base de datos
+            with transaction.atomic():
+                # Crea un nuevo objeto DatosCliente y guárdalo en la base de datos
+                nuevo_cliente = DatosCliente.objects.create(
+                    nombreCliente=nombre,
+                    apellidos=apellidos,
+                    direccion=direccion,
+                    telefono=telefono,
+                )
 
-            # Crea un nuevo objeto DatosCliente y guárdalo en la base de datos
-            nuevo_cliente = DatosCliente.objects.create(
-                nombreCliente=nombre,
-                apellidos=apellidos,
-                direccion=direccion,
-                telefono=telefono,
-            )
+                nueva_pizza_a_tu_gusto = PizzaATuGusto.objects.create(
+                    masa=masa
+                )
+                nueva_pizza_a_tu_gusto.ingrediente.add(*ingrediente)
 
-            nueva_pizza_a_tu_gusto = PizzaATuGusto.objects.create(
-                 masa=masa
-            )
-            nueva_pizza_a_tu_gusto.add(*ingrediente)
+                nuevo_pedido = Pedido.objects.create(
+                    cliente=nuevo_cliente,
+                    comentario=comentario
+                )
 
-            nuevo_pedido = Pedido.objects.create(
-                cliente=nuevo_cliente,
-                comentario=comentario
-            )
-
-            # Agrega elementos a las relaciones ManyToMany
-            nuevo_pedido.pizza.add(*pizza)
-            nuevo_pedido.pizzaATuGusto.add(nueva_pizza_a_tu_gusto)
-            nuevo_pedido.entrantes.add(*entrantes)
-            nuevo_pedido.bebidas.add(*bebidas)
+                # Agrega elementos a las relaciones ManyToMany
+                nuevo_pedido.pizza.add(*pizza)
+                nuevo_pedido.pizzaATuGusto.add(nueva_pizza_a_tu_gusto)
+                nuevo_pedido.entrantes.add(*entrantes)
+                nuevo_pedido.bebidas.add(*bebidas)
             
             return JsonResponse({'mensaje': 'Pedido y datos de cliente guardados correctamente'})
         except Exception as e:
