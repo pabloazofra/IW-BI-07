@@ -43,11 +43,11 @@ class Reserva(models.Model):
         return self.nombre
 
 class PizzaATuGusto(models.Model):
-    masa = models.ForeignKey(Masas, on_delete=models.CASCADE)
+    masa = models.ForeignKey(Masas, on_delete=models.CASCADE, blank=True, null=True)
     ingrediente = models.ManyToManyField(Ingrediente, blank=True, null=True)
 
     def __str__(self):
-        return self.nombre
+        return self.masa
     
 class Entrante(models.Model):
     nombre = models.CharField(max_length=100)
