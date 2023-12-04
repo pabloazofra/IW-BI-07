@@ -1,18 +1,33 @@
 {% extends "base.html" %}
 
-{% block titulo %} Lista de Pizzas {% endblock %}
+{% block titulo %} Menú de Pizzas {% endblock %}
 
 {% block contenido %}
-  <h2>Pizzas en el Menú</h2>
-  <br>
-  <ul>
-    {% for pizza in lista_pizzas %}
-      <li>{{ pizza.nombre }} - {{ pizza.descripcion }} - Precio: ${{ pizza.precio }}
-         - Ingredientes: 
-        {% for ingrediente in pizza.ingredientes.all %}
-        {{ ingrediente.nombre }}
-        {% endfor %}
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Explora Nuestro Menú de Pizzas</h2>
+
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card-deck">
+          {% for pizza in lista_pizzas %}
+            <div class="card mb-4">
+              <img src="{{ pizza.imagen.url }}" class="card-img-top" alt="{{ pizza.nombre }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ pizza.nombre }}</h5>
+                <p class="card-text">{{ pizza.descripcion }}</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Ingredientes:
+                    {% for ingrediente in pizza.ingredientes.all %}
+                      {{ ingrediente.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                  </li>
+                  <li class="list-group-item">Precio: ${{ pizza.precio }}</li>
+                </ul>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
