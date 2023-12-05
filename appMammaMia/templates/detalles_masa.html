@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block titulo %} Detalles de la masa {{ masa.nombre }} {% endblock %}
+{% block titulo %} {{ masa.nombre }} {% endblock %}
 
 {% block contenido %}
     <div class="producto-detalles">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="producto-asociado">
-            <h3>Pizzas asociadas a {{ masa.nombre }}</h3>
+            <h3>Pizzas con {{ masa.nombre }}</h3>
             {% if pizzas %}
                 <ul class="lista-productos">
                     {% for pizza in pizzas_asociadas %}

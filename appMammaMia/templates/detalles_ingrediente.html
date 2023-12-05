@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block titulo %} Detalles del ingrediente {{ ingrediente.nombre }} {% endblock %}
+{% block titulo %} {{ ingrediente.nombre }} {% endblock %}
 
 {% block contenido %}
     <div class="producto-detalles">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="producto-asociado">
-            <h3>Pizzas asociadas a {{ ingrediente.nombre }}</h3>
+            <h3>Pizzas con {{ ingrediente.nombre }}</h3>
             {% if pizzas %}
                 <ul class="lista-productos">
                     {% for pizza in pizzas_asociadas %}
@@ -30,3 +30,4 @@
         </div>
     </div>
 {% endblock %}
+

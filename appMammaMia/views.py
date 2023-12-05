@@ -23,10 +23,10 @@ def pizzas(request):
     return render(request, 'pizzas.html', context)
 
 #devuelve detalles de cada pizza
-def detalles_pizza(request):
-	pizza = get_object_or_404(Pizza)
-	context = {'pizza': pizza }
-	return render(request, 'detalles_pizza.html', context)
+def detalles_pizza(request, nombre):
+    pizza = get_object_or_404(Pizza, id=nombre)
+    ingredientes = pizza.ingredientes.all()
+    return render(request, 'detalles_pizza.html', {'pizza': pizza, 'ingredientes': ingredientes})
 
 #devuelve listado de masas
 def masas(request):
