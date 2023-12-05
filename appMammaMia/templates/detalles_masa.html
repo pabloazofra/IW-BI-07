@@ -3,20 +3,19 @@
 {% block titulo %} Detalles de la masa {{ masa.nombre }} {% endblock %}
 
 {% block contenido %}
-    <div class="detalles_masa">
-        <h2>Detalles de la masa</h2>
-        <div class="masa-info">
-            <h3>{{ masa.nombre }}</h3>
-            <p class="descripcion-masa">{{ masa.descripcion }}</p>
+    <div class="producto-detalles">
+        <div class="producto-info">
+            <h2>{{ masa.nombre }}</h2>
+            <p class="producto-descripcion">{{ masa.descripcion }}</p>
             <p>Precio: {{ masa.precio }}€</p>
             <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen">
         </div>
 
-        <div class="pizzas-asociadas">
+        <div class="producto-asociado">
             <h3>Pizzas asociadas a {{ masa.nombre }}</h3>
             {% if pizzas %}
-                <ul class="lista-pizzas">
-                    {% for pizza in pizzas %}
+                <ul class="lista-productos">
+                    {% for pizza in pizzas_asociadas %}
                         <li>
                             <h4>{{ pizza.nombre }}</h4>
                             <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">

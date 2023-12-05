@@ -43,14 +43,14 @@ def detalles_masa(request, nombre):
 #devuelve listado de ingredientes
 def ingredientes(request):
     ingredientes = Ingrediente.objects.all()
-    context = {'ingredientes': ingredientes }
-    return render(request, 'ingredientes.html', context)
+    return render(request, 'ingredientes.html', {'ingredientes': ingredientes })
 
 #devuelve detalles de cada ingrediente
-def detalles_ingrediente(request):
-	ingrediente = get_object_or_404(Ingrediente)
-	context = {'ingrediente': ingrediente }
-	return render(request, 'detalles_ingre.html', context)
+def detalles_ingrediente(request, nombre):
+    ingrediente = get_object_or_404(Ingrediente, id=nombre)
+    pizzas_asociadas = Pizza.objects.filter(ingredientes=ingrediente)
+    return render(request, 'detalles_ingrediente.html', {'ingrediente': ingrediente, 'pizzas_asociadas': pizzas_asociadas})
+
 
 #hacer reservas (?)
 def reservas(request):

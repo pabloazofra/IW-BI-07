@@ -1,10 +1,32 @@
 {% extends "base.html" %}
 
-{% block titulo %} Detalles de Ingrediente {% endblock %}
+{% block titulo %} Detalles del ingrediente {{ ingrediente.nombre }} {% endblock %}
 
 {% block contenido %}
-  <h2>{{ ingrediente.nombre }}</h2>
-  <p>Descripción: {{ ingrediente.descripcion }}</p>
-  <p>Precio: ${{ ingrediente.precio }}</p>
-  #añadir mas cosas
+    <div class="producto-detalles">
+        <div class="producto-info">
+            <h2>{{ ingrediente.nombre }}</h2>
+            <p class="producto-descripcion">{{ ingrediente.descripcion }}</p>
+            <p>Precio: {{ ingrediente.precio }}€</p>
+            <img src="{{ ingrediente.imagen.url }}" alt="{{ ingrediente.nombre }} - Imagen">
+        </div>
+
+        <div class="producto-asociado">
+            <h3>Pizzas asociadas a {{ ingrediente.nombre }}</h3>
+            {% if pizzas %}
+                <ul class="lista-productos">
+                    {% for pizza in pizzas_asociadas %}
+                        <li>
+                            <h4>{{ pizza.nombre }}</h4>
+                            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+                        </li>
+                    {% empty %}
+                        <li>No hay pizzas asociadas a este ingrediente.</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay pizzas asociadas a este ingrediente.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
