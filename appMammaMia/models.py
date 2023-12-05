@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Masas(models.Model):
@@ -38,6 +39,10 @@ class Pizza(models.Model):
 class Reserva(models.Model):
     nombre = models.CharField(max_length=100)
     telefono = models.IntegerField(max_length=9)
+    comensales = models.IntegerField(max_length = 2, default=1)
+    mesas = models.IntegerField(max_length = 2, default=1)
+    fecha_y_hora = models.DateTimeField(default=timezone.now)
+
 
     def __str__(self):
         return self.nombre
