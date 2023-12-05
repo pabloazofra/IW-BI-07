@@ -9,4 +9,37 @@
       <li>{{ reserva.nombre }} - {{ reserva.fecha }} - {{ reserva.hora }}</li>
     {% endfor %}
   </ul>
+  <script>
+    const nombre= document.getElementById('nombre')
+    const telefono = document.getElementById('telefono')
+    const comensales = document.getElementById('comensales')
+    const mesas = document.getElementById('mesas')
+    const fecha_y_hora = document.getElementById('fecha_y_hora')
+
+    $.ajax({
+                    url: "{% url 'guardar_reserva' %}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    data: JSON.stringify({
+                        nombre: nombre,
+                        telefono: telefono,
+                        comensales: comensales,
+                        mesas: mesas,
+                        fecha_y_hora: fecha_y_hora,
+                    }),
+                    contentType: 'application/json',
+
+                    success: function (response) {
+                        // Maneja la respuesta del servidor
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        // Maneja errores
+                        console.log(error);
+                    }
+                });
+
+  </script>
 {% endblock %}
