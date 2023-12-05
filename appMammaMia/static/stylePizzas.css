@@ -1,20 +1,23 @@
-body {
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    margin: 0;
+/* stylePizzas.css */
+
+/* Estilos para la página de pizzas */
+.pizzas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.menu-container {
-    max-width: 800px;
-    padding: 20px;
+.pizzas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
-.pizza-card {
-    width: 200px;
-    height: 300px;
+.pizza-item {
+    width: 300px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -23,39 +26,32 @@ body {
     transition: transform 0.2s;
 }
 
-.pizza-card:hover {
+.pizza-item:hover{
     transform: scale(1.05);
+}
+
+.pizza-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.pizza-info {
+    padding: 15px;
 }
 
 .pizza-imagen {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.card-body {
-    padding: 15px;
+    border-bottom: 1px solid #ccc;
 }
 
 .pizza-nombre {
     margin-top: 10px;
-    font-size: 1.2em;
-    color: #007bff;
-    font-weight: bold;
+    font-size: 1.5em;
 }
 
-.pizza-descripcion {
-    font-size: 0.9em;
-    margin-top: 5px;
-    color: #6c757d;
-}
-
-.list-group-item {
-    background-color: transparent;
-    border: none;
-    color: #6c757d;
+.pizza-precio {
     margin-top: 10px;
     font-weight: bold;
 }

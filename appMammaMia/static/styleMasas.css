@@ -23,6 +23,11 @@
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.masa-item:hover{
+    transform: scale(1.05);
 }
 
 .masa-item a {
@@ -44,11 +49,6 @@
 .masa-nombre {
     margin-top: 10px;
     font-size: 1.5em;
-}
-
-.masa-descripcion {
-    font-size: 0.9em;
-    margin-top: 5px;
 }
 
 .masa-precio {

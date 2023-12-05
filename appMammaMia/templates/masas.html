@@ -14,8 +14,9 @@
                         <div class="masa-info">
                             <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen" class="masa-imagen">
                             <h3 class="masa-nombre">{{ masa.nombre }}</h3>
-                            <p class="masa-descripcion">{{ masa.descripcion }}</p>
-                            <p class="masa-precio">Precio: {{ masa.precio }}€</p>
+                            <ul class="list-group list-group-flush">
+                                <p class="masa-precio">Precio: {{ masa.precio }}€</p>
+                            </ul>
                         </div>
                     </a>
                 </li>

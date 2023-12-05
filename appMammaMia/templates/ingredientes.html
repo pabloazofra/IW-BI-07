@@ -10,14 +10,14 @@
       <div class="ingrediente-item">
         <img src="{% static ingrediente.imagen.name %}" alt="{{ ingrediente.nombre }}">
         <h3>{{ ingrediente.nombre }}</h3>
-        <p class="descripcion">{{ ingrediente.descripcion }}</p>
-        <p class="precio">Precio: ${{ ingrediente.precio }}</p>
+        <ul class="list-group list-group-flush">
+          <p class="precio">Precio: ${{ ingrediente.precio }}</p>
+        </ul>
       </div>
-
-      <!-- Para que aparezcan en columnas de tres -->
-      {% if forloop.counter|divisibleby:3 and not forloop.last %}
-        </div><div class="ingredientes-lista">
-      {% endif %}
     {% endfor %}
 
+     <!-- Enlace al archivo de estilos -->
+  <link rel="stylesheet" href="{% static 'stylePizzas.css' %}">
+
 {% endblock %}
+ 
