@@ -34,10 +34,11 @@ def masas(request):
     return render(request, 'masas.html', {'masas': tipos_de_masa})
 
 #devuelve detalles de cada masa
-def detalles_masa(request, masa_id):
-    masa = get_object_or_404(Masas, pk=masa_id)
-    pizzas_asociadas = Pizza.objects.filter(tipo_masa=masa)
+def detalles_masa(request, nombre):
+    masa = get_object_or_404(Masas, id=nombre)
+    pizzas_asociadas = Pizza.objects.filter(masa=masa)
     return render(request, 'detalles_masa.html', {'masa': masa, 'pizzas_asociadas': pizzas_asociadas})
+
 
 #devuelve listado de ingredientes
 def ingredientes(request):

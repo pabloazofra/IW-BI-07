@@ -14,5 +14,5 @@ urlpatterns = [
     path('guardar_datos_cliente/', views.guardar_datos_cliente, name='guardar_datos_cliente'),
     path('contacto/', views.contacto, name='contacto'),
     path('masas/', views.masas, name='masas'),
-    path('masas/<int:masa_id>/', views.detalles_masa, name='detalles_masa'),
+    path('masas/<int:nombre>/', views.detalles_masa, name='detalles_masa'),
 ]

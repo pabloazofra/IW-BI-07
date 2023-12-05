@@ -10,7 +10,7 @@
         <ul class="masas-list">
             {% for masa in masas %}
                 <li class="masa-item">
-                    <a href="{% url 'detalles_masa' masa.id %}">
+                    <a href="{% url 'detalles_masa' nombre = masa.nombre %}">
                         <div class="masa-info">
                             <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen" class="masa-imagen">
                             <h3 class="masa-nombre">{{ masa.nombre }}</h3>
