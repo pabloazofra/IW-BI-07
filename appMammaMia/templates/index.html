@@ -28,17 +28,39 @@
         </div>
     </div>
 
-    <div class="entrantes">
+
+    <div class="extras">
         <h2>Entrantes</h2>
-        <div class="entrantes-items">
-            <div class="entrantes-item">
-                <img src="{% static 'patatas1.jpg' %}" alt="Patatas">
-                <p>Patatas</p>
-            </div>
-            <div class="entrantes-item">
-                <img src="{% static 'alitas1.jpg' %}" alt="Alitas de pollo">
-                <p>Alitas de pollo</p>
-            </div>
-        </div>
+        {% for entrante in lista_entrantes %}
+            <li class="extras-items">
+                <div class="extras-info">
+                    <img src="{{ entrante.imagen.url }}" alt="{{ entrante.nombre }} - Imagen" class="extras-imagen">
+                        <h3 class="extras-nombre">{{ entrante.nombre }}</h3>
+                        <p class="extras-descripcion">{{ entrante.descripcion }}</p>
+                            <ul class="list-group list-group-flush">
+                                <p class="extra-precio">Precio: {{ entrante.precio }}€</p>
+                            </ul>
+                </div>
+            </li>
+        {% endfor %}
     </div>
+
+    <div class="extras">
+        <h2>Bebidas</h2>
+        {% for bebida in lista_bebidas %}
+            <li class="extras-items">
+                <div class="extras-info">
+                    <img src="{{ bebida.imagen.url }}" alt="{{ bebida.nombre }} - Imagen" class="extras-imagen">
+                        <h3 class="extras-nombre">{{ bebida.nombre }}</h3>
+                            <ul class="list-group list-group-flush">
+                                <p class="extra-precio">Precio: {{ bebida.precio }}€</p>
+                            </ul>
+                </div>
+            </li>
+        {% endfor %}
+    </div>
+    <script>
+        console.log(context);
+    </script>
+    
 {% endblock %}

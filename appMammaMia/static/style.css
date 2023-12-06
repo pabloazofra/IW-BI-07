@@ -73,24 +73,42 @@ nav ul li a:hover{
     max-width: 100%; 
 }
 
-.entrantes {
+.extras {
     margin-top: 20px;
 }
 
-.entrantes h2 {
+.extras h2 {
     text-align: center;
 }
 
-.entrantes-items {
+.extras-items {
     display: flex;
     justify-content: space-around;
 }
 
-.entrantes-item {
-    width: 30%;
-    text-align: center;
+.extras.info {
+    padding: 15px;
 }
 
-.entrantes-item img {
-    max-width: 100%;
+.extras-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ccc;
+}
+
+.extras-nombre {
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.extras-descripcion {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.extras-precio {
+    margin-top: 10px;
+    font-weight: bold;
 }

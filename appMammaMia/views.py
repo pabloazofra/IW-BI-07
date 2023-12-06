@@ -18,7 +18,6 @@ def index(request):
 #devuelve listado de pizzas
 def pizzas(request):
     pizzas = get_list_or_404(Pizza.objects.all())
-    
     context = {'lista_pizzas': pizzas }
     return render(request, 'pizzas.html', context)
 
@@ -52,6 +51,22 @@ def detalles_ingrediente(request, nombre):
     ingrediente = get_object_or_404(Ingrediente, id=nombre)
     pizzas_asociadas = Pizza.objects.filter(ingredientes=ingrediente)
     return render(request, 'detalles_ingrediente.html', {'ingrediente': ingrediente, 'pizzas_asociadas': pizzas_asociadas})
+
+#devuelve listado de bebidas
+def bebidas(request):
+    bebidas = Bebida.objects.all()
+    context = {'lista_bebidas': bebidas}
+    print(context)  # Agrega esta línea para imprimir el contexto
+
+    return render(request, 'index.html',context)
+
+#devuelve listado de bebidas
+def entrantes(request):
+    entrantes = Entrante.objects.all()
+    context = {'lista_entrantes': entrantes}
+    print(context)  # Agrega esta línea para imprimir el contexto
+
+    return render(request, 'index.html',context)
 
 
 #hacer reservas (?)
