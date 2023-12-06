@@ -69,21 +69,6 @@ nav ul li a:hover{
     color: orangered;
 }
 
-/* Estilos para los recuadros de ingredientes */
-.ingrediente-item {
-    width: 30%;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.ingrediente-item img {
-    width: 100%;
-    border-radius: 5px;
-}
-
-
 /* eSTILOS PARA LA PAGINA DE INICIO */
 .menu-items {
     display: flex;

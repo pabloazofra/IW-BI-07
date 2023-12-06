@@ -1,34 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-{% block titulo %} Menú de Pizzas {% endblock %}
+{% block titulo %} Pizzas {% endblock %}
 
 {% block contenido %}
+    <div class="masas-container">
+        <h2>Menú de pizzas</h2>
+        <ul class="masas-list">
+            {% for pizza in lista_pizzas %}
+                <li class="masa-item">
+                    <a href="{% url 'detalles_pizza' pizza.id %}">
+                        <div class="masa-info">
+                            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen" class="masa-imagen">
+                            <h3 class="masa-nombre">{{ pizza.nombre }}</h3>
+                            <ul class="list-group list-group-flush">
+                                <p class="masa-precio">Precio: {{ pizza.precio }}€</p>
+                            </ul>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-  <div class="pizzas-container">
-    <h2 class="text-center mb-4">Explora Nuestro Menú de Pizzas</h2>
-    <ul class="pizzas-list">
-      {% for pizza in lista_pizzas %}
-        <li class="pizza-item">
-          <a href="{% url 'detalles_pizza' pizza.id %}">
-            <div class="pizza-info"></div>
-                <img src="{{ pizza.imagen.url }}" class="pizza-imagen" alt="{{ pizza.nombre }}">
-                <h3 class="pizza-nombre">{{ pizza.nombre }}</h3>
-                <ul class="list-group list-group-flush">
-                  <p class="pizza-precio">Precio: {{ pizza.precio }}€</p>
-                </ul>
-            </div>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-</div>
-
-
-
-
-
-  <!-- Enlace al archivo de estilos -->
-<link rel="stylesheet" href="{% static 'stylePizzas.css' %}">
+    <!-- Enlace al archivo de estilos -->
+    <link rel="stylesheet" href="{% static 'styleMasas.css' %}">
 {% endblock %}

@@ -1,34 +1,32 @@
 {% extends "base.html" %}
 
-{% block titulo %} Detalles de la pizza {{ masa.nombre }} {% endblock %}
+{% block titulo %} {{ pizza.nombre }} {% endblock %}
 
 {% block contenido %}
-    <div class="detalles_pizza">
-        <h2>Detalles de Tipo de Masa</h2>
-        <div class="masa-info">
-            <h3>{{ masa.nombre }}</h3>
-            <p class="descripcion-masa">{{ masa.descripcion }}</p>
-            <p>Precio: {{ masa.precio }}€</p>
-            <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen">
+    <div class="producto-detalles">
+        <div class="producto-info">
+            <h2>{{ pizza.nombre }}</h2>
+            <p class="producto-descripcion">{{ pizza.descripcion }}</p>
+            <p>Precio: {{ pizza.precio }}€</p>
+            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+            <p> {{ pizza.masa.nombre }}</p>
         </div>
 
-        <div class="pizzas-asociadas">
-            <h3>Pizzas Asociadas a {{ masa.nombre }}</h3>
-            {% if pizzas_asociadas %}
-                <ul class="lista-pizzas">
-                    {% for pizza in pizzas_asociadas %}
+        <div class="producto-asociado">
+            <h3>Ingredientes</h3>
+            {% if ingrediente %}
+                <ul class="lista-productos">
+                    {% for ingrediente in ingredientes %}
                         <li>
-                            <h4>{{ pizza.nombre }}</h4>
-                            <p>Descripción: {{ pizza.descripcion }}</p>
-                            <p>Precio: {{ pizza.precio }}€</p>
-                            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+                            <h4>{{ ingrediente.nombre }}</h4>
+                            <img src="{{ ingrediente.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
                         </li>
                     {% empty %}
-                        <li>No hay pizzas asociadas a este tipo de masa.</li>
+                        <li>No hay ingredientes asociados a esta pizza.</li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No hay pizzas asociadas a este tipo de masa.</p>
+                <p>No hay ingredientes asociados a esta pizza.</p>
             {% endif %}
         </div>
     </div>

@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block titulo %} {{ masa.nombre }} {% endblock %}
+{% block titulo %} {{ ingrediente.nombre }} {% endblock %}
 
 {% block contenido %}
     <div class="producto-detalles">
         <div class="producto-info">
-            <h2>{{ masa.nombre }}</h2>
-            <p class="producto-descripcion">{{ masa.descripcion }}</p>
-            <p>Precio: {{ masa.precio }}€</p>
-            <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen">
+            <h2>{{ ingrediente.nombre }}</h2>
+            <p class="producto-descripcion">{{ ingrediente.descripcion }}</p>
+            <p>Precio: {{ ingrediente.precio }}€</p>
+            <img src="{{ ingrediente.imagen.url }}" alt="{{ ingrediente.nombre }} - Imagen">
         </div>
 
         <div class="producto-asociado">
-            <h3>Pizzas con {{ masa.nombre }}</h3>
+            <h3>Pizzas con {{ ingrediente.nombre }}</h3>
             {% if pizzas %}
                 <ul class="lista-productos">
                     {% for pizza in pizzas_asociadas %}
@@ -21,12 +21,13 @@
                             <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
                         </li>
                     {% empty %}
-                        <li>No hay pizzas asociadas a este tipo de masa.</li>
+                        <li>No hay pizzas asociadas a este ingrediente.</li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No hay pizzas asociadas a este tipo de masa.</p>
+                <p>No hay pizzas asociadas a este ingrediente.</p>
             {% endif %}
         </div>
     </div>
 {% endblock %}
+
