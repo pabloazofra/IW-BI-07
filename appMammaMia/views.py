@@ -52,22 +52,11 @@ def detalles_ingrediente(request, nombre):
     pizzas_asociadas = Pizza.objects.filter(ingredientes=ingrediente)
     return render(request, 'detalles_ingrediente.html', {'ingrediente': ingrediente, 'pizzas_asociadas': pizzas_asociadas})
 
-#devuelve listado de bebidas
-def bebidas(request):
-    bebidas = Bebida.objects.all()
-    context = {'lista_bebidas': bebidas}
-    print(context)  # Agrega esta línea para imprimir el contexto
 
-    return render(request, 'index.html',context)
-
-#devuelve listado de bebidas
-def entrantes(request):
-    entrantes = Entrante.objects.all()
-    context = {'lista_entrantes': entrantes}
-    print(context)  # Agrega esta línea para imprimir el contexto
-
-    return render(request, 'index.html',context)
-
+def index(request):
+    lista_entrantes = Entrante.objects.all()
+    lista_bebidas = Bebida.objects.all()
+    return render(request, 'index.html', {'lista_entrantes': lista_entrantes, 'lista_bebidas': lista_bebidas})
 
 #hacer reservas (?)
 def reservas(request):
