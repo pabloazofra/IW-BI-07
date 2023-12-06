@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block titulo %} {{ ingrediente.nombre }} {% endblock %}
 
 {% block contenido %}
@@ -29,5 +29,6 @@
             {% endif %}
         </div>
     </div>
+<link rel="stylesheet" href="{% static 'styleDetalles.css' %}">
 {% endblock %}
 

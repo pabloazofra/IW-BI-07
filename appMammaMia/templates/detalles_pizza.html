@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block titulo %} {{ pizza.nombre }} {% endblock %}
 
 {% block contenido %}
@@ -7,9 +7,9 @@
         <div class="producto-info">
             <h2>{{ pizza.nombre }}</h2>
             <p class="producto-descripcion">{{ pizza.descripcion }}</p>
+            <p><a href="{% url 'detalles_masa' nombre=pizza.masa.id %}">{{ pizza.masa.nombre }}</a></p>
             <p>Precio: {{ pizza.precio }}€</p>
             <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
-            <p> {{ pizza.masa.nombre }}</p>
         </div>
 
         <div class="producto-asociado">
@@ -30,4 +30,5 @@
             {% endif %}
         </div>
     </div>
+<link rel="stylesheet" href="{% static 'styleDetalles.css' %}">
 {% endblock %}

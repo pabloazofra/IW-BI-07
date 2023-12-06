@@ -1,0 +1,80 @@
+/* Estilos para la página de detalles del producto */
+.producto-detalles {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.producto-info {
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.producto-info h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.producto-descripcion {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.producto-info p {
+    margin: 0;
+}
+
+.producto-info p a {
+    color: #333;
+    text-decoration: none;
+    margin: 0;
+}
+
+.producto-info img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.producto-asociado {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.lista-productos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.lista-productos li {
+    width: 300px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.lista-productos li:hover {
+    transform: scale(1.05);
+}
+
+.lista-productos h4 {
+    color: #333;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.lista-productos img {
+    width: 100%;
+    height: auto;
+}

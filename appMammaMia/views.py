@@ -43,7 +43,9 @@ def detalles_masa(request, nombre):
 #devuelve listado de ingredientes
 def ingredientes(request):
     ingredientes = Ingrediente.objects.all()
-    return render(request, 'ingredientes.html', {'ingredientes': ingredientes })
+
+    context = {'lista_ingredientes': ingredientes}
+    return render(request, 'ingredientes.html', context)
 
 #devuelve detalles de cada ingrediente
 def detalles_ingrediente(request, nombre):
