@@ -150,3 +150,9 @@ input {
 textarea {
     border: 1px solid black;
 }
+
+#container-imagen {
+  width: 30px;
+  height: auto;
+  
+}

@@ -24,7 +24,7 @@
                 <label class="accordion-content">
                     {% for entrante in lista_entrantes %}
                             <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox_{{ entrante.id }}" value="{{ entrante.id }}">
-                            {{ entrante.nombre }}
+                            {{ entrante.nombre }}: {{ entrante.precio }} €
                     {% endfor %}
                 </label>
             </div>
@@ -37,7 +37,10 @@
                 <label class="accordion-content">
                     {% for pizza in lista_pizzas %}
                             <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox_{{ pizza.id }}" value="{{ pizza.id }}">
-                            {{ pizza.nombre }}
+                            {{ pizza.nombre }}: {{ pizza.precio }} €
+                            <div id="container-imagen">
+                                <img src="{% static pizza.imagen.name %}" alt="">
+                            </div>
                     {% endfor %}
                 </label>
             </div>
@@ -51,12 +54,18 @@
                     <h4 style="font-weight: bold;">Masas</h4>
                     {% for masa in lista_masas %}
                             <input type="checkbox" name="masa_checkbox" id="masa_checkbox_{{ masa.id }}" value="{{ masa.id }}">
-                            {{ masa.nombre }}
+                            {{ masa.nombre }}: {{ masa.precio }} €
+                            <div id="container-imagen">
+                                <img src="{% static masa.imagen.name %}" alt="">
+                            </div>
                     {% endfor %}
                     <h4 style="font-weight: bold;">Ingredientes</h4>
                     {% for ingrediente in lista_ingredientes %}
                             <input type="checkbox" name="ingrediente_checkbox" id="ingrediente_checkbox_{{ ingrediente.id }}" value="{{ ingrediente.id }}">
-                            {{ ingrediente.nombre }}
+                            {{ ingrediente.nombre }}: {{ ingrediente.precio }} €
+                            <div id="container-imagen">
+                                <img src="{% static ingrediente.imagen.name %}" alt="">
+                            </div>
                     {% endfor %}
                 </label>
             </div>
@@ -65,11 +74,14 @@
                 <div class="accordion-heading">
                     <h3>Bebidas</h3>
                     <i class="fas fa-angle-down"></i>
-                </div>
+                </div id="container-imagen">
                 <label class="accordion-content">
                     {% for bebida in lista_bebidas %}
                             <input type="checkbox" name="bebida_checkbox" id="bebida_checkbox_{{ bebida.id }}" value="{{ bebida.id }}">
-                            {{ bebida.nombre }}
+                            {{ bebida.nombre }}: {{ bebida.precio }} €
+                            <div id="container-imagen">
+                                <img src="{% static bebida.imagen.name %}" alt="">
+                            </div>
                     {% endfor %}
                 </label>
             </div>    
