@@ -151,8 +151,11 @@ textarea {
     border: 1px solid black;
 }
 
-#container-imagen {
-  width: 30px;
+#container-imagen img {
+  display: inline-block;
+  width: 40px;
   height: auto;
-  
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
 }

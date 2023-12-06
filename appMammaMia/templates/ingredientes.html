@@ -12,7 +12,7 @@
                 <li class="masa-item">
                     <a href="{% url 'detalles_ingrediente' ingrediente.id %}">
                         <div class="masa-info">
-                            <img src="{{ ingrediente.imagen.url }}" alt="{{ ingrediente.nombre }} - Imagen" class="masa-imagen">
+                            <img src="{% static ingrediente.imagen.name %}" alt="{{ ingrediente.nombre }} - Imagen" class="masa-imagen">
                             <h3 class="masa-nombre">{{ ingrediente.nombre }}</h3>
                             <ul class="list-group list-group-flush">
                                 <p class="masa-precio">Precio: {{ ingrediente.precio }}€</p>
