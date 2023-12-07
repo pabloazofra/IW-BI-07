@@ -9,7 +9,7 @@
             <h2>{{ masa.nombre }}</h2>
             <p class="producto-descripcion">{{ masa.descripcion }}</p>
             <p>Precio: {{ masa.precio }}€</p>
-            <img src="{{ masa.imagen.url }}" alt="{{ masa.nombre }} - Imagen">
+            <img src="{% static masa.imagen.name %}" alt="{{ masa.nombre }} - Imagen">
         </div>
 
         <div class="producto-asociado">
@@ -19,7 +19,7 @@
                     {% for pizza in pizzas_asociadas %}
                         <li>
                             <h4>{{ pizza.nombre }}</h4>
-                            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+                            <img src="{% static pizza.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
                         </li>
                     {% empty %}
                         <li>No hay pizzas asociadas a este tipo de masa.</li>

@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block titulo %} {{ ingrediente.nombre }} {% endblock %}
-
 {% block contenido %}
     <div class="producto-detalles">
         <div class="producto-info">
             <h2>{{ ingrediente.nombre }}</h2>
             <p class="producto-descripcion">{{ ingrediente.descripcion }}</p>
             <p>Precio: {{ ingrediente.precio }}€</p>
-            <img src="{{ ingrediente.imagen.url }}" alt="{{ ingrediente.nombre }} - Imagen">
+            <img src="{% static ingrediente.imagen.name %}" alt="{{ ingrediente.nombre }} - Imagen">
         </div>
 
         <div class="producto-asociado">
@@ -18,7 +17,7 @@
                     {% for pizza in pizzas_asociadas %}
                         <li>
                             <h4>{{ pizza.nombre }}</h4>
-                            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+                            <img src="{% static pizza.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
                         </li>
                     {% empty %}
                         <li>No hay pizzas asociadas a este ingrediente.</li>

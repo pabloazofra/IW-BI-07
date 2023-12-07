@@ -9,7 +9,7 @@
             <p class="producto-descripcion">{{ pizza.descripcion }}</p>
             <p><a href="{% url 'detalles_masa' nombre=pizza.masa.id %}">{{ pizza.masa.nombre }}</a></p>
             <p>Precio: {{ pizza.precio }}€</p>
-            <img src="{{ pizza.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+            <img src="{% static pizza.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
         </div>
 
         <div class="producto-asociado">
@@ -19,7 +19,7 @@
                     {% for ingrediente in ingredientes %}
                         <li>
                             <h4>{{ ingrediente.nombre }}</h4>
-                            <img src="{{ ingrediente.imagen.url }}" alt="{{ pizza.nombre }} - Imagen">
+                            <img src="{% static ingrediente.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
                         </li>
                     {% empty %}
                         <li>No hay ingredientes asociados a esta pizza.</li>
