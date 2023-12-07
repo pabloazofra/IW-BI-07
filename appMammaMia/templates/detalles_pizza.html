@@ -13,8 +13,8 @@
         </div>
 
         <div class="producto-asociado">
-            <h3>Ingredientes</h3>
-            {% if ingrediente %}
+            <h3>Ingredientes</h3><br>
+            {% if ingredientes %}
                 <ul class="lista-productos">
                     {% for ingrediente in ingredientes %}
                         <li>
@@ -26,7 +26,9 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No hay ingredientes asociados a esta pizza.</p>
+                {% for ingrediente in ingredientes %}
+                    <p>{{ ingrediente.name }}</p>
+                {% endfor %}
             {% endif %}
         </div>
     </div>

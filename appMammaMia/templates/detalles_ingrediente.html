@@ -24,7 +24,9 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No hay pizzas asociadas a este ingrediente.</p>
+                {% for pizza in pizzas_asociadas %}
+                    <p>{{ pizza.nombre }}</p>
+                {% endfor %}
             {% endif %}
         </div>
     </div>
