@@ -25,6 +25,9 @@
                     {% for entrante in lista_entrantes %}
                             <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox_{{ entrante.id }}" value="{{ entrante.id }}">
                             {{ entrante.nombre }}: {{ entrante.precio }} €
+                            <div id="container-imagen">
+                                <img src="{% static entrante.imagen.name %}" alt="">
+                            </div>
                     {% endfor %}
                 </label>
             </div>

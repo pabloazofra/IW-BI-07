@@ -72,7 +72,7 @@ def pedido(request):
     bebidas = get_list_or_404(Bebida)
     entrantes = get_list_or_404(Entrante)
     masas = Masas.objects.all()
-    ingredientes = get_list_or_404(Ingrediente)
+    ingredientes = Ingrediente.objects.all()
     pizzas = get_list_or_404(Pizza.objects.all())
     pedido = Pedido.objects.all()
     datosCliente = DatosCliente.objects.all()

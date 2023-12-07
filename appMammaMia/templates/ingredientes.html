@@ -3,12 +3,12 @@
 {% load static %}
 
 {% block titulo %} Nuestros ingredientes {% endblock %}
-
+{% block extrastyle %} <link rel="stylesheet" href="{% static 'styleProductos.css' %}"> {% endblock %}
 {% block contenido %}
     <div class="masas-container">
         <h2 class="masas-titulo">Ingredientes disponibles</h2>
         <ul class="masas-list">
-            {% for ingrediente in ingredientes %}
+            {% for ingrediente in lista_ingredientes %}
                 <li class="masa-item">
                     <a href="{% url 'detalles_ingrediente' ingrediente.id %}">
                         <div class="masa-info">
@@ -23,7 +23,5 @@
             {% endfor %}
         </ul>
     </div>
-
-    <!-- Enlace al archivo de estilos -->
-    <link rel="stylesheet" href="{% static 'styleProductos.css' %}">
+    
 {% endblock %}
