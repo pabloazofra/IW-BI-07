@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
+body{
+  background: #fff;
+}
+
 h2 {
     color: black;
     margin-top: 20px;
@@ -46,10 +50,6 @@ dialog {
   text-transform: capitalize;
   outline: none; border:none;
   text-decoration: none;
-}
-
-body{
-  background: #ddd;
 }
 
 .container{
