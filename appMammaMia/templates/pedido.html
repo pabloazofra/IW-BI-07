@@ -23,7 +23,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for entrante in lista_entrantes %}
-                            <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox_{{ entrante.id }}" value="{{ entrante.id }}">
+                            <input type="checkbox" name="entrantes_checkbox" id="entrantes_checkbox_{{ entrante.id }}" value="{{ entrante.id }}" precio="{{ entrante.precio }}">
                             {{ entrante.nombre }}: {{ entrante.precio }} €
                             <div id="container-imagen">
                                 <img src="{% static entrante.imagen.name %}" alt="">
@@ -39,7 +39,7 @@
                 </div>
                 <label class="accordion-content">
                     {% for pizza in lista_pizzas %}
-                            <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox_{{ pizza.id }}" value="{{ pizza.id }}">
+                            <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox_{{ pizza.id }}" value="{{ pizza.id }}" precio="{{ pizza.precio }}">
                             {{ pizza.nombre }}: {{ pizza.precio }} €
                             <div id="container-imagen">
                                 <img src="{% static pizza.imagen.name %}" alt="">
@@ -56,7 +56,7 @@
                 <label class="accordion-content">
                     <h4 style="font-weight: bold;">Masas</h4>
                     {% for masa in lista_masas %}
-                            <input type="checkbox" name="masa_checkbox" id="masa_checkbox_{{ masa.id }}" value="{{ masa.id }}">
+                            <input type="checkbox" name="masa_checkbox" id="masa_checkbox_{{ masa.id }}" value="{{ masa.id }}" precio="{{ masa.precio }}">
                             {{ masa.nombre }}: {{ masa.precio }} €
                             <div id="container-imagen">
                                 <img src="{% static masa.imagen.name %}" alt="">
@@ -64,7 +64,7 @@
                     {% endfor %}
                     <h4 style="font-weight: bold;">Ingredientes</h4>
                     {% for ingrediente in lista_ingredientes %}
-                            <input type="checkbox" name="ingrediente_checkbox" id="ingrediente_checkbox_{{ ingrediente.id }}" value="{{ ingrediente.id }}">
+                            <input type="checkbox" name="ingrediente_checkbox" id="ingrediente_checkbox_{{ ingrediente.id }}" value="{{ ingrediente.id }}" precio="{{ ingrediente.precio }}">
                             {{ ingrediente.nombre }}: {{ ingrediente.precio }} €
                             <div id="container-imagen">
                                 <img src="{% static ingrediente.imagen.name %}" alt="">
@@ -80,7 +80,7 @@
                 </div id="container-imagen">
                 <label class="accordion-content">
                     {% for bebida in lista_bebidas %}
-                            <input type="checkbox" name="bebida_checkbox" id="bebida_checkbox_{{ bebida.id }}" value="{{ bebida.id }}">
+                            <input type="checkbox" name="bebida_checkbox" id="bebida_checkbox_{{ bebida.id }}" value="{{ bebida.id }}" precio="{{ bebida.precio }}">
                             {{ bebida.nombre }}: {{ bebida.precio }} €
                             <div id="container-imagen">
                                 <img src="{% static bebida.imagen.name %}" alt="">
@@ -115,7 +115,8 @@
             <input type="text" id="direccion"><br>
             <label for="telefono">Teléfono</label><br>
             <input type="text" id="telefono"><br><br>
-            <textarea name="comentario" id="comentario" cols="30" rows="5" placeholder="Añada algun comentario para el repartidor"></textarea><br>
+            <textarea name="comentario" id="comentario" cols="30" rows="5" placeholder="Añada algun comentario para el repartidor"></textarea>
+            <h2 id="precioTotal"></h2><br>
             <button type="submit" id="guardar">Realizar Pedido</button><br>
         </div>
     </dialog>
@@ -127,7 +128,15 @@
         const btnAbrirVentana = document.getElementById("enviar");
         const ventana = document.getElementById("ventana");
         const btnGuardarDatos = document.getElementById("guardar");
-        const checkboxs = document.querySelectorAll("input[type='checkbox']");
+        const checkboxs = Array.from(document.querySelectorAll("input[type='checkbox']"));
+        let checkboxEntrantesPrecio = [];
+        let checkboxBebidasPrecio = [];
+        let checkboxPizzasPrecio = [];
+        let checkboxMasasPrecio = [];
+        let checkboxIngredientesPrecio = [];
+
+        
+        
         btnAbrirVentana.addEventListener("click", ()=> {
             let alMenosUnoSeleccionado = false;
             checkboxs.forEach(checkbox => {
@@ -135,7 +144,52 @@
                     alMenosUnoSeleccionado = true;
                 }
                 });
+                function procesarCheckboxes() {
+                    var checkboxes = document.querySelectorAll("input[type='checkbox']");
+                    checkboxes.forEach(function (checkbox) {
+                        var precio = checkbox.getAttribute('precio');
+                        if (checkbox.checked) {
+                            switch (checkbox.name) {
+                                case "entrantes_checkbox":
+                                checkboxEntrantesPrecio.push(precio);
+                                break;
+                                case "pizza_checkbox":
+                                checkboxPizzasPrecio.push(precio);
+                                break;
+                                case "masa_checkbox":
+                                checkboxMasasPrecio.push(precio);
+                                break;
+                                case "ingrediente_checkbox":
+                                checkboxIngredientesPrecio.push(precio);
+                                break;
+                                case "bebida_checkbox":
+                                checkboxBebidasPrecio.push(precio);
+                                break;
+                                default:
+                                console.log("Checkbox de categoría desconocida");
+                            }
+                        }
+                    });
+                }
+                function calcularSumaTotal() {
+                    let sumaTotal = 0;
+                    sumaTotal += sumarLista(checkboxEntrantesPrecio);
+                    sumaTotal += sumarLista(checkboxBebidasPrecio);
+                    sumaTotal += sumarLista(checkboxPizzasPrecio);
+                    sumaTotal += sumarLista(checkboxMasasPrecio);
+                    sumaTotal += sumarLista(checkboxIngredientesPrecio);
+                    
+                    return sumaTotal;
+                }
+                function sumarLista(lista) {
+                    return lista.reduce(function (total, valor) {
+                        return total + parseFloat(valor);
+                    }, 0);
+                }
                 if (alMenosUnoSeleccionado) {
+                    let precioTotal = document.getElementById('precioTotal');
+                    procesarCheckboxes()
+                    precioTotal.textContent = `Total a pagar: ${calcularSumaTotal().toFixed(2)} €`;
                     ventana.showModal();
                 } else {
                     alert("Tienes que seleccionar almenos un producto");
