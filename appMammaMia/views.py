@@ -56,7 +56,11 @@ def detalles_ingrediente(request, nombre):
 def index(request):
     lista_entrantes = Entrante.objects.all()
     lista_bebidas = Bebida.objects.all()
-    return render(request, 'index.html', {'lista_entrantes': lista_entrantes, 'lista_bebidas': lista_bebidas})
+    masa = Masas.objects.all()
+    ingrediente = Ingrediente.objects.all()
+    pizza = Pizza.objects.all()
+    return render(request, 'index.html', {'lista_entrantes': lista_entrantes, 'lista_bebidas': lista_bebidas, 
+                                          masa: 'masas', ingrediente: 'ingredientes', pizza: 'pizzas' })
 
 #hacer reservas (?)
 def reservas(request):

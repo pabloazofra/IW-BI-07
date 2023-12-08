@@ -6,20 +6,32 @@
 {% block contenido %}
     <div class="menu-items">
         <div class="menu-item">
-            <a href="{% url 'masas' %}">
-                <img src="{% static 'masa1.jpg' %}" alt="Masas">
-                <p>Explora nuestras deliciosas masas</p>
-            </a>
+        <a href="{% url 'masas' %}">
+            {% for masa in masas %}
+            {% if masa.id == 3 %}
+                <img src="{% static masa.imagen.name %}" alt="Masas">
+            {% endif %}
+            {% endfor %}  
+            <p>Explora nuestras deliciosas masas</p>
+        </a>
         </div>
         <div class="menu-item">
             <a href="{% url 'pizzas' %}">
-                <img src="{% static 'pizza1.jpg' %}" alt="Pizzas">
+                {% for pizza in pizzas %}
+                {% if pizza.id == 3 %}
+                    <img src="{% static pizza.imagen.name %}" alt="Masas">
+                {% endif %}
+                {% endfor %}  
                 <p>Conoce nuestras increíbles pizzas</p>
             </a>
         </div>
         <div class="menu-item">
             <a href="{% url 'ingredientes' %}">
-                <img src="{% static 'ingrediente1.jpg' %}" alt="Ingredientes">
+                {% for ingrediente in ingredientes %}
+                {% if ingrediente.id == 3 %}
+                    <img src="{% static ingrediente.imagen.name %}" alt="Masas">
+                {% endif %}
+                {% endfor %}  
                 <p>Descubre nuestros variados ingredientes</p>
             </a>
         </div>
@@ -33,7 +45,7 @@
                 {% for entrante in lista_entrantes %}
                     <li class="extras-items">
                         <div class="extras-info">
-                            <img src="{{ entrante.imagen.url }}" alt="{{ entrante.nombre }} - Imagen" class="extras-imagen">
+                            <img src="{% static entrante.imagen.name %}" alt="{{ entrante.nombre }} - Imagen" class="extras-imagen">
                             <h3 class="extras-nombre">{{ entrante.nombre }}</h3>
                             <p class="extras-descripcion">{{ entrante.descripcion }}</p>
                             <p class="extra-precio">Precio: {{ entrante.precio }}€</p>
@@ -49,7 +61,7 @@
                 {% for bebida in lista_bebidas %}
                     <li class="extras-items">
                         <div class="extras-info">
-                            <img src="{{ bebida.imagen.url }}" alt="{{ bebida.nombre }} - Imagen" class="extras-imagen">
+                            <img src="{% static bebida.imagen.name %}" alt="{{ bebida.nombre }} - Imagen" class="extras-imagen">
                             <h3 class="extras-nombre">{{ bebida.nombre }}</h3>
                             <p class="extra-precio">Precio: {{ bebida.precio }}€</p>
                         </div>

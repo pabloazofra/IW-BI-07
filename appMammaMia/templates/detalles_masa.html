@@ -13,8 +13,8 @@
         </div>
 
         <div class="producto-asociado">
-            <h3>Pizzas con {{ masa.nombre }}</h3>
-            {% if pizzas %}
+            <h3>Pizzas con {{ masa.nombre }}</h3><br>
+            {% if pizzas_asociadas %}
                 <ul class="lista-productos">
                     {% for pizza in pizzas_asociadas %}
                         <li>

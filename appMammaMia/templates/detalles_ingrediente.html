@@ -11,13 +11,13 @@
         </div>
 
         <div class="producto-asociado">
-            <h3>Pizzas con {{ ingrediente.nombre }}</h3>
-            {% if pizzas %}
+            <h3>Pizzas con {{ ingrediente.nombre }}</h3><br>
+            {% if pizzas_asociadas %}
                 <ul class="lista-productos">
                     {% for pizza in pizzas_asociadas %}
                         <li>
                             <h4>{{ pizza.nombre }}</h4>
-                            <img src="{% static pizza.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
+                            <img src="{% static pizza.imagen.name %}" alt="{{ ingrediente.nombre }} - Imagen">
                         </li>
                     {% empty %}
                         <li>No hay pizzas asociadas a este ingrediente.</li>
