@@ -155,8 +155,8 @@ def guardar_datos_cliente(request):
                 )
 
                 nueva_pizza_a_tu_gusto = PizzaATuGusto.objects.create(
-                    masa=masa
                 )
+                nueva_pizza_a_tu_gusto.ingrediente.add(*masa)
                 nueva_pizza_a_tu_gusto.ingrediente.add(*ingrediente)
 
                 nuevo_pedido = Pedido.objects.create(
