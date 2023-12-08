@@ -8,7 +8,7 @@
         <div class="menu-item">
         <a href="{% url 'masas' %}">
             {% for masa in masas %}
-            {% if masa.id == 3 %}
+            {% if masa.id == 4 %}
                 <img src="{% static masa.imagen.name %}" alt="Masas">
             {% endif %}
             {% endfor %}  
@@ -28,7 +28,7 @@
         <div class="menu-item">
             <a href="{% url 'ingredientes' %}">
                 {% for ingrediente in ingredientes %}
-                {% if ingrediente.id == 3 %}
+                {% if ingrediente.id == 12 %}
                     <img src="{% static ingrediente.imagen.name %}" alt="Masas">
                 {% endif %}
                 {% endfor %}  

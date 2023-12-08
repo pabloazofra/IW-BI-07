@@ -144,3 +144,12 @@ nav ul li a:hover{
     font-weight: bold;
     color: #e44d26; /* Ajusta según sea necesario */
 }
+
+#container-imagen div a img {
+    display: inline-block;
+    width: 40px;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
