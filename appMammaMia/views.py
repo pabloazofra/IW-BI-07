@@ -7,6 +7,7 @@ from django.http import HttpResponseBadRequest, HttpResponse
 from django.db import transaction
 import json
 from django.views.decorators.csrf import csrf_exempt
+from .models import Reserva
 
 @csrf_exempt
 
@@ -64,9 +65,37 @@ def index(request):
 
 #hacer reservas (?)
 def reservas(request):
-    reserva = get_object_or_404(Reserva)
-    context = {'reserva': reserva }
-    return render(request, 'reservas.html', context)
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        telefono = request.POST.get('telefono')
+        comensales = request.POST.get('comensales')
+        hora_reserva = request.POST.get('hora_reserva')
+
+        # Validar disponibilidad de mesas para el número de comensales
+        comensales_total = int(comensales)
+
+        reserva = Reserva.objects.create(
+            nombre=nombre,
+            telefono=telefono,
+            comensales=comensales_total,
+            hora_reserva=hora_reserva,
+        )
+
+        if comensales_total > reserva.mesas_disponibles * 4:
+            reserva.delete()
+            return HttpResponseBadRequest('No hay mesas suficientes para el número de comensales.')
+
+        # Calcular la cantidad de mesas necesarias
+        mesas_necesarias = (comensales_total + 3) // 4
+
+        # Actualizar el estado de disponibilidad de las mesas
+        reserva.mesas_disponibles -= mesas_necesarias
+        reserva.mesas_asignadas = mesas_necesarias
+        reserva.save()
+
+        return HttpResponse('Reserva realizada con éxito.')
+    else:
+        return render(request, 'reservas.html')
 
 #contactar
 def contacto(request):

@@ -37,15 +37,22 @@ class Pizza(models.Model):
         return self.nombre
 
 class Reserva(models.Model):
+    HORA_CHOICES = [
+        ('13:00', '13:00'),
+        ('14:00', '14:00'),
+        ('15:00', '15:00'),
+    ]
+
     nombre = models.CharField(max_length=100)
     telefono = models.IntegerField(max_length=9)
-    comensales = models.IntegerField(max_length = 2, default=1)
-    mesas = models.IntegerField(max_length = 2, default=1)
+    comensales = models.IntegerField(default=1, choices=[(i, i) for i in range(1, 13)])
+    hora_reserva = models.CharField(max_length=5, choices=HORA_CHOICES)
     fecha_y_hora = models.DateTimeField(default=timezone.now)
-
+    mesas_asignadas = models.IntegerField(default=0)
+    mesas_disponibles = models.IntegerField(default=10)  # Número inicial de mesas disponibles
 
     def __str__(self):
-        return self.nombre
+        return f"Reserva de {self.comensales} comensales a las {self.hora_reserva}"
 
 class PizzaATuGusto(models.Model):
     masa = models.ForeignKey(Masas, on_delete=models.CASCADE, blank=True, null=True)
