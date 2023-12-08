@@ -18,8 +18,10 @@
                 <ul class="lista-productos">
                     {% for ingrediente in ingredientes %}
                         <li>
-                            <h4>{{ ingrediente.nombre }}</h4>
-                            <img src="{% static ingrediente.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
+                            <a href="{% url 'detalles_ingrediente' ingrediente.id %}">
+                                <h4>{{ ingrediente.nombre }}</h4>
+                                <img src="{% static ingrediente.imagen.name %}" alt="{{ pizza.nombre }} - Imagen">
+                            </a>
                         </li>
                     {% empty %}
                         <li>No hay ingredientes asociados a esta pizza.</li>
