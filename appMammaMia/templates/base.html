@@ -1,43 +1,78 @@
-
-
+<!-- base.html -->
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        {% block extrastyle %} {% endblock %}
-        <title>{% block titulo %}Mamma Mia{% endblock %}</title>
-    </head>
-    <body>
-      <header>
-        <h1>Mamma Mia Pizzería</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}">Inicio</a></li>
-                <li><a href="{% url 'pedido' %}">Pedido</a></li>
-                <li><a href="{% url 'reservas' %}">Reservas</a></li>
-                <li><a href="{% url 'pizzas' %}">Pizzas</a></li>
-                <li><a href="{% url 'masas' %}">Masas</a></li>
-                <li><a href="{% url 'ingredientes' %}">Ingredientes</a></li>
-            </ul>
-        </nav>
-      </header>
-      {% block contenido %}
-      {% endblock %}
-        <footer>
-            <p id="parrafo-footer">
-                &copy; <span id="anyoMostrado"></span> MammaMia <a href="">Acerca de nosotros</a> 
-                <a href="{% url 'contacto' %}">Contacto</a>
-                <a href="">Política de privacidad</a> <a href="">Términos y condiciones</a>
-            </p>
-        </footer>
-        <script>
-            var fechaActual = new Date();
-            var anyoActual = fechaActual.getFullYear();
-            document.getElementById("anyoMostrado").innerHTML = anyoActual;
-            </script>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3"></script>
+    {% block extrastyle %} {% endblock %}
+    <title>{% block titulo %}Mamma Mia{% endblock %}</title>
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+
+    <script type="text/x-template" id="mi-componente-template">
+      <div>
+        <h1>{{ mensaje }}</h1>
+      </div>
+    </script>
+
+    <header>
+      <h1>Mamma Mia Pizzería</h1>
+      <nav>
+        <ul>
+          <li><a href="{% url 'index' %}">Inicio</a></li>
+          <li><a href="{% url 'pedido' %}">Pedido</a></li>
+          <li><a href="{% url 'reservas' %}">Reservas</a></li>
+          <li><a href="{% url 'pizzas' %}">Pizzas</a></li>
+          <li><a href="{% url 'masas' %}">Masas</a></li>
+          <li><a href="{% url 'ingredientes' %}">Ingredientes</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    {% block contenido %}
+    {% endblock %}
+
+    <footer>
+      <p id="parrafo-footer">
+        &copy; <span id="anyoMostrado"></span> MammaMia
+        <router-link to="/acerca-de-nosotros">Acerca de nosotros</router-link>
+        <router-link to="/contacto">Contacto</router-link>
+        <router-link to="/politica-privacidad">Política de privacidad</router-link>
+        <router-link to="/terminos-condiciones">Términos y condiciones</router-link>
+      </p>
+    </footer>
+
+    <script>
+      // Configuración de Vue Router
+      const routes = [
+        { path: '/acerca-de-nosotros', component: AcercaDeNosotros },
+        { path: '/contacto', component: Contacto },
+        { path: '/politica-privacidad', component: PoliticaPrivacidad },
+        { path: '/terminos-condiciones', component: TerminosCondiciones },
+      ];
+
+      const router = new VueRouter({
+        routes,
+        mode: 'history',
+      });
+
+      new Vue({
+        el: '#app',
+        router,
+      });
+    </script>
+
+    <script>
+      var fechaActual = new Date();
+      var anyoActual = fechaActual.getFullYear();
+      document.getElementById("anyoMostrado").innerHTML = anyoActual;
+    </script>
+  </body>
 </html>
