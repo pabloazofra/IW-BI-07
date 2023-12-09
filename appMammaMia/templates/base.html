@@ -42,12 +42,12 @@
     <footer>
       <p id="parrafo-footer">
         &copy; <span id="anyoMostrado"></span> MammaMia
-        <router-link to="/acerca-de-nosotros">Acerca de nosotros</router-link>
-        <router-link to="/contacto">Contacto</router-link>
-        <router-link to="/politica-privacidad">Política de privacidad</router-link>
-        <router-link to="/terminos-condiciones">Términos y condiciones</router-link>
+        <a href="/acerca-de-nosotros" target="_blank" @click="navegarAcercaDeNosotros()">Acerca de nosotros</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+        <a href="/politica-privacidad" target="_blank" @click="navegarPoliticaPrivacidad()">Política de privacidad</a>
+        <a href="/terminos-condiciones" target="_blank" @click="navegarTerminosCondiciones()">Términos y condiciones</a>
       </p>
-    </footer>
+     </footer>
 
     <script type="module" src="{% url 'javascript_view' %}">
       import AcercaDeNosotros from '../../static/js/vue_app/components/AcercaDeNosotros.vue';
@@ -64,7 +64,8 @@
 
       const router = new VueRouter({
         routes,
-        mode: 'history',
+        mode: 'hash',
+        base: '/js/'
       });
 
       new Vue({

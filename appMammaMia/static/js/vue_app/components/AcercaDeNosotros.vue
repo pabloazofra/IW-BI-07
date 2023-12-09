@@ -28,7 +28,6 @@
   
   <script>
   export default {
-    // Lógica específica del componente acerca de nosotros (si es necesario)
   };
   </script>
   
