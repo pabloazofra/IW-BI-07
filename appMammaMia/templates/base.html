@@ -43,11 +43,11 @@
       <p id="parrafo-footer">
         &copy; <span id="anyoMostrado"></span> MammaMia
         <a href="/acerca-de-nosotros" target="_blank" @click="navegarAcercaDeNosotros()">Acerca de nosotros</a>
-        <a href="/contacto" target="_blank" @click="navegarContacto()">Contacto</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
         <a href="/politica-privacidad" target="_blank" @click="navegarPoliticaPrivacidad()">Política de privacidad</a>
         <a href="/terminos-condiciones" target="_blank" @click="navegarTerminosCondiciones()">Términos y condiciones</a>
       </p>
-    </footer>
+     </footer>
 
     <script>
       // Configuración de Vue Router
