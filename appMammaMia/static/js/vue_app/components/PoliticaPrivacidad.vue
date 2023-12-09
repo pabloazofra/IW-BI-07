@@ -39,7 +39,6 @@
   
   <script>
   export default {
-    // Lógica específica del componente de política de privacidad (si es necesario)
   };
   </script>
   
