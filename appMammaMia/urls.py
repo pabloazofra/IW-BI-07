@@ -15,4 +15,6 @@ urlpatterns = [
     path('contacto/', views.contacto, name='contacto'),
     path('masas/', views.masas, name='masas'),
     path('masas/<int:nombre>/', views.detalles_masa, name='detalles_masa'),
+    path('javascript/', views.javascript_view, name='javascript_view'),
+
 ]

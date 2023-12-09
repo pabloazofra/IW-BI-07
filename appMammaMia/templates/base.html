@@ -49,7 +49,11 @@
       </p>
     </footer>
 
-    <script>
+    <script type="module" src="{% url 'javascript_view' %}">
+      import AcercaDeNosotros from '../../static/js/vue_app/components/AcercaDeNosotros.vue';
+      import Contacto from '../../static/js/vue_app/components/Contacto.vue';
+      import PoliticaPrivacidad from '../../static/js/vue_app/components/PoliticaPrivacidad.vue';
+      import TerminosCondiciones from '../../static/js/vue_app/components/TerminosCondiciones.vue';
       // Configuración de Vue Router
       const routes = [
         { path: '/acerca-de-nosotros', component: AcercaDeNosotros },
