@@ -95,6 +95,7 @@ class Pedido(models.Model):
     pizzaATuGusto = models.ManyToManyField(PizzaATuGusto, blank=True, null=True)
     entrantes = models.ManyToManyField(Entrante, blank=True)
     bebidas = models.ManyToManyField(Bebida, blank=True)
+    precioTotal = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     comentario = models.TextField()
 
     def __str__(self):

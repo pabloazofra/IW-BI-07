@@ -143,6 +143,7 @@ def guardar_datos_cliente(request):
             entrantes = data.get('entrantes')
             bebidas = data.get('bebidas')
             comentario = data.get('comentario')
+            precioTotal = data.get('precioTotal')
             
             # Inicia una transacción para garantizar la integridad de la base de datos
             with transaction.atomic():
@@ -161,6 +162,7 @@ def guardar_datos_cliente(request):
 
                 nuevo_pedido = Pedido.objects.create(
                     cliente=nuevo_cliente,
+                    precioTotal=precioTotal,
                     comentario=comentario
                 )
 

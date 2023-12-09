@@ -117,7 +117,7 @@
             <input type="text" id="telefono"><br><br>
             <textarea name="comentario" id="comentario" cols="30" rows="5" placeholder="Añada algun comentario para el repartidor"></textarea>
             <h2 id="precioTotal"></h2><br>
-            <button type="submit" id="guardar">Realizar Pedido</button><br>
+            <button type="submit" id="guardar" data-precio-total="{{ precioTotalBD }}">Realizar Pedido</button><br>
         </div>
     </dialog>
     <div class="container-boton">
@@ -134,6 +134,7 @@
         let checkboxPizzasPrecio = [];
         let checkboxMasasPrecio = [];
         let checkboxIngredientesPrecio = [];
+        let precioTotalBD;
 
         
         
@@ -187,13 +188,15 @@
                     }, 0);
                 }
                 if (alMenosUnoSeleccionado) {
-                    let precioTotal = document.getElementById('precioTotal');
+                    const precioTotal = document.getElementById('precioTotal');
                     procesarCheckboxes()
                     precioTotal.textContent = `Total a pagar: ${calcularSumaTotal().toFixed(2)} €`;
+                    precioTotalBD = calcularSumaTotal().toFixed(2);
                     ventana.showModal();
                 } else {
                     alert("Tienes que seleccionar almenos un producto");
                 }
+                
             
         })
 
@@ -219,6 +222,8 @@
                 const apellidosValor = apellidos.value;
                 const direccionValor = direccion.value;
                 const telefonoValor = telefono.value;
+                const precioTotal = precioTotalBD;
+                console.log(precioTotalBD)
                 var csrftoken = $('[name=csrfmiddlewaretoken]').val();
                 // Envia los datos al servidor
                 $.ajax({
@@ -238,6 +243,7 @@
                         entrantes: checkboxEntrantes,
                         bebidas: checkboxBebidas,
                         comentario: comentarioValor,
+                        precioTotal: precioTotal,
                     }),
                     contentType: 'application/json',
 
