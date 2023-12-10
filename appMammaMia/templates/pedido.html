@@ -130,6 +130,9 @@
             <button type="submit" id="guardar" data-precio-total="{{ precioTotalBD }}">Realizar Pedido</button><br>
         </div>
     </dialog>
+    <dialog id="ventana1">
+        <h2>Pedido realizado</h2>
+    </dialog>
     <div class="container-boton">
         <button type="submit" id="enviar" class="boton-pedir" >Pedir</button>
     </div>
@@ -138,6 +141,7 @@
         const btnAbrirVentana = document.getElementById("enviar");
         const ventana = document.getElementById("ventana");
         const btnGuardarDatos = document.getElementById("guardar");
+        const ventana1 = document.getElementById("ventana1");
         const checkboxs = Array.from(document.querySelectorAll("input[type='checkbox']"));
         let checkboxEntrantesPrecio = [];
         let checkboxBebidasPrecio = [];
@@ -260,6 +264,10 @@
                     success: function (response) {
                         // Maneja la respuesta del servidor
                         console.log(response);
+                        ventana1.showModal();
+                        setTimeout(function() {
+                            ventana1.close();
+                        }, 2000);
                     },
                     error: function (error) {
                         // Maneja errores
