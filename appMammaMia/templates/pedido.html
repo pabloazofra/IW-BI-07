@@ -86,6 +86,7 @@
                 <div class="accordion-heading">
                     <h3>Bebidas</h3>
                     <i class="fas fa-angle-down"></i>
+                </div>
                         <div class="accordion-content">
                             {% for bebida in lista_bebidas %}
                                 <label for="bebida_checkbox_{{ bebida.id }}">
@@ -97,7 +98,6 @@
                                     </div>
                             {% endfor %}
                         </div>
-                </div>
             </div> 
         </div>
     </div>
@@ -126,7 +126,7 @@
             <label for="telefono">Teléfono</label><br>
             <input type="text" id="telefono"><br><br>
             <textarea name="comentario" id="comentario" cols="30" rows="5" placeholder="Añada algun comentario para el repartidor"></textarea>
-            <h2 id="precioTotal"></h2> <br>
+            <h2 id="precioTotal">d</h2> <br>
             <button type="submit" id="guardar" data-precio-total="{{ precioTotalBD }}">Realizar Pedido</button><br>
         </div>
     </dialog>
