@@ -190,6 +190,14 @@
                 </div>
             </div>
         </section>
+        <div class="social-sharing">
+            <a href="https://twitter.com/intent/tweet?url=URL_DE_TU_PAGINA&text=¡Echa un vistazo a mi agenda en Vue.js!&via=tucuenta" target="_blank" title="Compartir en Twitter">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=URL_DE_TU_PAGINA" target="_blank" title="Compartir en Facebook">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </div>
 
         <!-- Footer -->
         <footer class="text-center">
@@ -234,6 +242,24 @@
     <script src="js/vue.js"></script>   
 
     <script src="js/contacto.js"></script>
+
+    <!-- JSON-LD para datos estructurados -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+        {% for contacto in contactos %}
+        {
+            "@type": "Person",
+            "name": "{{ contacto.nombre }}",
+            "email": "{{ contacto.email }}",
+            "telephone": "{{ contacto.telefono }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
+    }
+    </script>
 
 </body>
 
