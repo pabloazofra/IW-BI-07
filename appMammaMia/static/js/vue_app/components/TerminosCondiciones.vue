@@ -33,7 +33,10 @@
     </div>
   </template>
   
-  
+  <script>
+  export default {
+  };
+  </script>
   
   <style scoped>
   /* Puedes colocar tus estilos específicos aquí */
