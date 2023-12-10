@@ -25,6 +25,16 @@ dialog {
     height: 55%;
 }
 
+#ventana1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 70%;
+  height: 55%;
+}
+
 #container-ventana {
     display: grid;
     place-items: center;
