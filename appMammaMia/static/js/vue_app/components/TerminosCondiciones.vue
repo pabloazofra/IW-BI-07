@@ -35,6 +35,7 @@
   
   <script>
   export default {
+    // Lógica específica del componente de términos y condiciones (si es necesario)
   };
   </script>
   

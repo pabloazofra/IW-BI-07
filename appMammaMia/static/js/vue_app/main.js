@@ -18,8 +18,8 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode: 'hash',
-    base: '/js/',
+  mode: 'history',
+    base: '/app-mamma-mia/',
 });
 
 new Vue({
