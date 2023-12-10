@@ -11,15 +11,7 @@ from .models import Reserva
 
 @csrf_exempt
 
-def javascript_view(request):
-    vue_files = [
-        'appMammaMia/static/js/vue_app/components/AcercaDeNosotros.vue',
-        'appMammaMia/static/js/vue_app/components/Contacto.vue', 
-        'appMammaMia/static/js/vue_app/components/PoliticaPrivacidad.vue',
-        'appMammaMia/static/js/vue_app/components/TerminosCondiciones.vue'
-        ]
-    content = '\n\n'.join(open(file_path).read() for file_path in vue_files) 
-    return HttpResponse(content, content_type='text/javascript')
+##AÑADIR MAS COSAS A LOS DETALLES DE CADA COSA
 
 def index(request):
     return render(request, "index.html")

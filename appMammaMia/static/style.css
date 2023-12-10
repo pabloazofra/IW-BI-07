@@ -17,10 +17,6 @@ footer {
     padding-bottom: 12px;
 }
 
-footer router-link {
-    cursor: pointer;
-}
-
 a {
     text-decoration: none;
     color: white;
