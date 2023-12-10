@@ -151,7 +151,8 @@ textarea {
     border: 1px solid black;
 }
 
-#container-imagen img {
+
+.contenedor-img img {
   display: inline-block;
   width: 40px;
   height: auto;

@@ -28,7 +28,7 @@
                             {{ entrante.nombre }}: {{ entrante.precio }} €
                         </label>
                             
-                            <div class="contenedor-imagen">
+                            <div class="container-imagen">
                                 <img class="imagen" src="{% static entrante.imagen.name %}" alt="">
                             </div>
                     {% endfor %}
@@ -46,7 +46,7 @@
                             <input type="checkbox" name="pizza_checkbox" id="pizza_checkbox_{{ pizza.id }}" value="{{ pizza.id }}" data-precio="{{ pizza.precio }}">
                             {{ pizza.nombre }}: {{ pizza.precio }} €
                         </label>
-                            <div class="container-imagen">
+                            <div id="container-imagen">
                                 <img class="imagen" src="{% static pizza.imagen.name %}" alt="">
                             </div>
                     {% endfor %}
