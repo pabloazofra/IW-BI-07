@@ -36,6 +36,28 @@
             </a>
         </div>
     </div>
+    <div class="pizzas-destacadas">
+        <h2>Pizzas Destacadas</h2>
+        <div class="pizzas-masas">
+            {% for masa in masas %}
+                <div class="menu-item">
+                    <h3>{{ masa.nombre }}</h3>
+                    {% for pizza in pizzaFiltrada %}
+                        {% if pizza.masa_id == masa.id %}
+                            <a href="{% url 'detalles_pizza' pizza.id %}">
+                                <div class="pizza-masa-item">
+                                    <img src="{% static pizza.imagen.name %}" alt="{{ pizza.nombre }}">
+                                    <p class="pizza-nombre">{{ pizza.nombre }}</p>
+                                    <p class="pizza-precio">Precio: {{ pizza.precio }}€</p>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
 
     <div class="extras-container">
 

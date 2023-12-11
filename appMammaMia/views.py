@@ -36,7 +36,7 @@ def masas(request):
 #devuelve detalles de cada masa
 def detalles_masa(request, nombre):
     masa = get_object_or_404(Masas, id=nombre)
-    pizzas_asociadas = Pizza.objects.filter(masa=masa)
+    pizzas_asociadas = masa.pizza_set.all()
     return render(request, 'detalles_masa.html', {'masa': masa, 'pizzas_asociadas': pizzas_asociadas})
 
 
@@ -50,7 +50,7 @@ def ingredientes(request):
 #devuelve detalles de cada ingrediente
 def detalles_ingrediente(request, nombre):
     ingrediente = get_object_or_404(Ingrediente, id=nombre)
-    pizzas_asociadas = Pizza.objects.filter(ingredientes=ingrediente)
+    pizzas_asociadas = ingrediente.pizza_set.all()
     return render(request, 'detalles_ingrediente.html', {'ingrediente': ingrediente, 'pizzas_asociadas': pizzas_asociadas})
 
 
@@ -60,8 +60,10 @@ def index(request):
     masa = Masas.objects.all()
     ingrediente = Ingrediente.objects.all()
     pizza = Pizza.objects.all()
+    pizzaFiltrada = Pizza.objects.raw('SELECT * FROM( SELECT * FROM appMammaMia_Pizza ORDER BY precio DESC) GROUP BY nombre ')
+
     return render(request, 'index.html', {'lista_entrantes': lista_entrantes, 'lista_bebidas': lista_bebidas, 
-                                          'masas': masa, 'ingredientes': ingrediente, 'pizzas': pizza})
+                                          'masas': masa, 'ingredientes': ingrediente, 'pizzas': pizza, 'pizzaFiltrada': pizzaFiltrada})
 
 #hacer reservas (?)
 def reservas(request):

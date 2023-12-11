@@ -142,7 +142,7 @@ nav ul li a:hover{
 .extra-precio {
     margin-top: 10px;
     font-weight: bold;
-    color: #e44d26; /* Ajusta según sea necesario */
+    color: #e44d26; 
 }
 
 #container-imagen div a img {
@@ -153,3 +153,44 @@ nav ul li a:hover{
     display: block;
     margin: 0 auto;
   }
+
+  .pizzas-masas {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+
+.pizza-masa-item {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pizza-masa-item img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.pizza-nombre {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.pizza-precio {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #e44d26; 
+}
+
+.pizzas-destacadas {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pizzas-destacadas h2 {
+    font-size: 24px
+    margin-bottom: 10px; 
+}
